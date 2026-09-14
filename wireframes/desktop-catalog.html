@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe — Catalog Desktop | Funny-Friends</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #e8e8e8; color: #555; }
+    .wf { max-width: 1440px; margin: 0 auto; background: #fff; min-height: 100vh; }
+    .ph { background: repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 4px, #e8e8e8 4px, #e8e8e8 8px); border: 2px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #999; font-size: 11px; text-transform: uppercase; }
+    .block { background: #eee; border: 1px solid #ccc; }
+    .header { display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; border-bottom: 2px solid #ddd; height: 72px; }
+    .logo { width: 140px; height: 32px; background: #ccc; }
+    .layout { display: grid; grid-template-columns: 280px 1fr; gap: 32px; padding: 32px 48px; }
+    .sidebar { position: sticky; top: 16px; align-self: start; border: 2px solid #ddd; padding: 24px; }
+    .filter-group { margin-bottom: 24px; }
+    .filter-title { width: 80px; height: 14px; background: #ccc; margin-bottom: 12px; }
+    .checkbox { width: 100%; height: 20px; background: #f5f5f5; margin-bottom: 6px; border: 1px solid #e0e0e0; }
+    .slider { width: 100%; height: 8px; background: #ddd; border-radius: 4px; margin: 16px 0; }
+    .main-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .breadcrumb { width: 200px; height: 12px; background: #eee; }
+    .sort { width: 140px; height: 32px; background: #f5f5f5; border: 1px solid #ccc; }
+    .products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .product-card { border: 1px solid #ddd; padding: 16px; }
+    .product-img { height: 240px; margin-bottom: 12px; }
+    .product-title { width: 80%; height: 14px; background: #ddd; margin-bottom: 8px; }
+    .badge { width: 90px; height: 18px; background: #ffe0b2; margin-bottom: 8px; font-size: 9px; display:flex;align-items:center;justify-content:center; }
+    .volume-toggle { display: flex; gap: 4px; margin: 8px 0; }
+    .volume-toggle span { width: 36px; height: 22px; background: #eee; border: 1px solid #ccc; font-size: 9px; display:flex;align-items:center;justify-content:center; }
+    .product-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+    .add-btn { width: 90px; height: 32px; background: #ccc; }
+    .pagination { display: flex; justify-content: center; gap: 8px; margin-top: 48px; }
+    .page { width: 32px; height: 32px; background: #eee; border: 1px solid #ccc; }
+    .annotation { position: fixed; top: 12px; right: 12px; background: #333; color: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; }
+    .back { position: fixed; top: 12px; left: 12px; background: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; text-decoration: none; color: #333; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <a class="back" href="index.html">← Wireframes</a>
+  <div class="annotation">Desktop 1440px — Catalog</div>
+  <div class="wf">
+    <header class="header"><div class="logo"></div><div class="block" style="width:300px;height:36px"></div><div class="block" style="width:100px;height:36px"></div></header>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="filter-group">
+          <div class="filter-title"></div>
+          <div class="slider"></div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:#999"><span>500 ₴</span><span>15 000 ₴</span></div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">Notes</div>
+          <div class="checkbox">☐ Oud</div>
+          <div class="checkbox">☐ Vanilla</div>
+          <div class="checkbox">☐ Amber</div>
+          <div class="checkbox">☐ Citrus</div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">Concentration</div>
+          <div class="checkbox">☐ EDP</div>
+          <div class="checkbox">☐ Parfum</div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">Volume</div>
+          <div class="checkbox">☐ 30 ml</div>
+          <div class="checkbox">☐ 50 ml</div>
+          <div class="checkbox">☐ 100 ml</div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">Availability</div>
+          <div class="checkbox">☐ In Stock</div>
+        </div>
+      </aside>
+      <main>
+        <div class="main-top"><div class="breadcrumb"></div><div class="sort"></div></div>
+        <div class="products">
+          <div class="product-card"><div class="ph product-img">3D</div><div class="product-title"></div><div class="badge">Залишилося 3 шт.</div><div class="volume-toggle"><span>30</span><span>50</span><span>100</span></div><div class="product-footer"><div class="block" style="width:60px;height:16px"></div><div class="add-btn"></div></div></div>
+          <div class="product-card"><div class="ph product-img">3D</div><div class="product-title"></div><div class="badge">Залишилося 2 шт.</div><div class="volume-toggle"><span>30</span><span>50</span><span>100</span></div><div class="product-footer"><div class="block" style="width:60px;height:16px"></div><div class="add-btn"></div></div></div>
+          <div class="product-card"><div class="ph product-img">3D</div><div class="product-title"></div><div class="volume-toggle"><span>30</span><span>50</span><span>100</span></div><div class="product-footer"><div class="block" style="width:60px;height:16px"></div><div class="add-btn"></div></div></div>
+          <div class="product-card"><div class="ph product-img">3D</div><div class="product-title"></div><div class="volume-toggle"><span>30</span><span>50</span><span>100</span></div><div class="product-footer"><div class="block" style="width:60px;height:16px"></div><div class="add-btn"></div></div></div>
+          <div class="product-card"><div class="ph product-img">3D</div><div class="product-title"></div><div class="volume-toggle"><span>30</span><span>50</span><span>100</span></div><div class="product-footer"><div class="block" style="width:60px;height:16px"></div><div class="add-btn"></div></div></div>
+          <div class="product-card"><div class="ph product-img">3D</div><div class="product-title"></div><div class="volume-toggle"><span>30</span><span>50</span><span>100</span></div><div class="product-footer"><div class="block" style="width:60px;height:16px"></div><div class="add-btn"></div></div></div>
+        </div>
+        <div class="pagination"><div class="page"></div><div class="page"></div><div class="page"></div></div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

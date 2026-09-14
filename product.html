@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nocturne Oud — Funny-Friends</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <style>
+    .pdp { padding-top: calc(var(--header-height) + var(--space-12)); padding-bottom: var(--space-16); }
+    .pdp-layout { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); align-items: start; }
+    .pdp-gallery { position: sticky; top: calc(var(--header-height) + var(--space-8)); }
+    .pdp-gallery__main { height: 560px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .pdp-bottle { width: 160px; height: 400px; background: linear-gradient(180deg, rgba(212,175,55,0.25) 0%, rgba(18,18,18,0.9) 40%, rgba(5,5,5,1) 100%); border: 1px solid rgba(212,175,55,0.35); border-radius: 8px 8px 20px 20px; box-shadow: 0 0 60px rgba(212,175,55,0.2); position: relative; }
+    .pdp-bottle::before { content: ''; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 70px; height: 55px; background: linear-gradient(180deg, rgba(212,175,55,0.5) 0%, rgba(18,18,18,0.95) 100%); border: 1px solid rgba(212,175,55,0.35); border-radius: 6px 6px 0 0; }
+    .pdp-bottle::after { content: 'NOCTURNE OUD'; position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-family: var(--font-serif); font-size: 10px; letter-spacing: 0.25em; color: var(--color-accent-gold); white-space: nowrap; }
+    .pdp-thumbs { display: flex; gap: var(--space-3); margin-top: var(--space-4); }
+    .pdp-thumb { width: 72px; height: 72px; background: rgba(255,255,255,0.03); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); cursor: pointer; transition: all var(--transition-fast); }
+    .pdp-thumb.active, .pdp-thumb:hover { border-color: var(--color-accent-gold-muted); }
+    .pdp-info__category { font-size: var(--font-size-sm); letter-spacing: var(--letter-spacing-wide); text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: var(--space-2); }
+    .pdp-info__title { font-size: var(--font-size-4xl); margin-bottom: var(--space-4); }
+    .pdp-info__rating { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-6); color: var(--color-text-secondary); }
+    .pdp-info__rating .star { color: var(--color-accent-champagne); }
+    .pdp-info__desc { margin-bottom: var(--space-6); }
+    .pdp-price { font-family: var(--font-serif); font-size: var(--font-size-3xl); color: var(--color-text-primary); margin: var(--space-6) 0; }
+    .pdp-price span { font-size: var(--font-size-lg); color: var(--color-text-muted); }
+    .pdp-sample { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-4); background: rgba(212,175,55,0.08); border: 1px dashed var(--color-accent-gold-muted); border-radius: var(--radius-md); margin: var(--space-6) 0; cursor: pointer; }
+    .pdp-sample input { accent-color: var(--color-accent-gold); width: 18px; height: 18px; }
+    .pyramid { margin-top: var(--space-10); padding: var(--space-8); }
+    .pyramid__title { font-family: var(--font-serif); font-size: var(--font-size-xl); margin-bottom: var(--space-6); text-align: center; }
+    .pyramid__levels { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
+    .pyramid__level { padding: var(--space-4) var(--space-8); text-align: center; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); transition: all var(--transition-fast); cursor: default; }
+    .pyramid__level:hover { border-color: var(--color-accent-gold-muted); background: rgba(212,175,55,0.05); }
+    .pyramid__level--top { width: 140px; }
+    .pyramid__level--heart { width: 220px; }
+    .pyramid__level--base { width: 300px; }
+    .pyramid__label { font-size: var(--font-size-xs); letter-spacing: var(--letter-spacing-wide); text-transform: uppercase; color: var(--color-accent-gold); margin-bottom: var(--space-1); }
+    .pyramid__notes { font-family: var(--font-serif); font-size: var(--font-size-base); }
+    .similar { margin-top: var(--space-20); padding-top: var(--space-12); border-top: 1px solid var(--color-border-subtle); }
+    .similar__title { font-family: var(--font-serif); font-size: var(--font-size-2xl); margin-bottom: var(--space-8); text-align: center; }
+    @media (max-width: 1024px) {
+      .pdp-layout { grid-template-columns: 1fr; }
+      .pdp-gallery { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="header__logo">Funny<span>-</span>Friends</a>
+    <nav class="header__nav">
+      <a href="index.html">Головна</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="brand.html">Про бренд</a>
+    </nav>
+    <div class="header__actions">
+      <button class="header__currency">UAH ▾</button>
+      <button class="header__icon-btn">♡</button>
+      <button class="header__cart" data-cart-open>Кошик <span class="header__cart-badge">2</span></button>
+    </div>
+  </header>
+
+  <div class="container pdp">
+    <nav class="breadcrumb" style="margin-bottom:var(--space-8);font-size:var(--font-size-sm);color:var(--color-text-muted)">
+      <a href="index.html" style="color:var(--color-text-secondary)">Головна</a> / <a href="catalog.html" style="color:var(--color-text-secondary)">Каталог</a> / Nocturne Oud
+    </nav>
+
+    <div class="pdp-layout">
+      <div class="pdp-gallery">
+        <div class="glass-panel pdp-gallery__main">
+          <div class="pdp-bottle"></div>
+        </div>
+        <div class="pdp-thumbs">
+          <div class="pdp-thumb active"></div>
+          <div class="pdp-thumb"></div>
+          <div class="pdp-thumb"></div>
+          <div class="pdp-thumb"></div>
+        </div>
+      </div>
+
+      <div class="pdp-info">
+        <p class="pdp-info__category">Oriental Woody · Extrait de Parfum</p>
+        <h1 class="pdp-info__title">Nocturne Oud</h1>
+        <div class="pdp-info__rating"><span class="star">★</span> 4.9 · 128 відгуків</div>
+        <p class="pdp-info__desc">Глибокий, інтимний аромат для вечірніх годин. Laos Oud поєднується з амброю та трояндою дамаською, створюючи композицію, що розкривається протягом 12+ годин.</p>
+
+        <div class="volume-toggle">
+          <button class="volume-toggle__btn" data-volume="30">30 ml</button>
+          <button class="volume-toggle__btn active" data-volume="50">50 ml</button>
+          <button class="volume-toggle__btn" data-volume="100">100 ml</button>
+        </div>
+
+        <div class="pdp-price" id="pdpPrice">6 800 <span>₴</span></div>
+
+        <label class="pdp-sample">
+          <input type="checkbox" checked>
+          <span>+ Безкоштовний пробник 2 ml до замовлення</span>
+        </label>
+
+        <button class="btn btn--primary btn--lg" style="width:100%;margin-bottom:var(--space-4)" onclick="addToCart('Nocturne Oud')">Додати в кошик</button>
+        <button class="btn btn--glass" style="width:100%">♡ Додати в Wishlist</button>
+
+        <div class="glass-panel pyramid">
+          <h3 class="pyramid__title">Ольфакторна піраміда</h3>
+          <div class="pyramid__levels">
+            <div class="pyramid__level pyramid__level--top">
+              <div class="pyramid__label">Верхні ноти</div>
+              <div class="pyramid__notes">Bergamot · Pink Pepper</div>
+            </div>
+            <div class="pyramid__level pyramid__level--heart">
+              <div class="pyramid__label">Серцеві ноти</div>
+              <div class="pyramid__notes">Damask Rose · Jasmine Sambac</div>
+            </div>
+            <div class="pyramid__level pyramid__level--base">
+              <div class="pyramid__label">Базові ноти</div>
+              <div class="pyramid__notes">Laos Oud · Amber · Sandalwood</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="similar">
+      <h2 class="similar__title">Схожі аромати</h2>
+      <div class="products-grid">
+        <article class="glass-panel product-card">
+          <div class="product-card__image"><div class="product-card__bottle" style="background:linear-gradient(180deg,rgba(200,150,100,0.2) 0%,rgba(5,5,5,1) 100%)"></div></div>
+          <p class="product-card__category">Oriental</p>
+          <h3 class="product-card__name">Santal Noir</h3>
+          <div class="product-card__footer"><span class="product-card__price">6 200 ₴</span><a href="product.html" class="btn btn--glass btn--sm">Переглянути</a></div>
+        </article>
+        <article class="glass-panel product-card">
+          <div class="product-card__image"><div class="product-card__bottle" style="background:linear-gradient(180deg,rgba(229,193,88,0.2) 0%,rgba(5,5,5,1) 100%)"></div></div>
+          <p class="product-card__category">Floral Amber</p>
+          <h3 class="product-card__name">Velvet Rose</h3>
+          <div class="product-card__footer"><span class="product-card__price">5 400 ₴</span><a href="#" class="btn btn--glass btn--sm">Переглянути</a></div>
+        </article>
+        <article class="glass-panel product-card">
+          <div class="product-card__image"><div class="product-card__bottle"></div></div>
+          <p class="product-card__category">Woody</p>
+          <h3 class="product-card__name">Amber Mystique</h3>
+          <div class="product-card__footer"><span class="product-card__price">7 200 ₴</span><a href="#" class="btn btn--glass btn--sm">Переглянути</a></div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <div class="cart-overlay" id="cartOverlay" data-cart-close></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer__header"><h2 class="cart-drawer__title">Кошик (2)</h2><button class="cart-drawer__close" data-cart-close>✕</button></div>
+    <div class="cart-drawer__progress"><p class="cart-drawer__progress-text">До безкоштовної доставки залишилося 400 ₴</p><div class="cart-drawer__progress-bar"><div class="cart-drawer__progress-fill"></div></div></div>
+    <div class="cart-drawer__items">
+      <div class="cart-item"><div class="cart-item__image"></div><div><h4 class="cart-item__name">Nocturne Oud</h4><p class="cart-item__meta">50 ml</p><span class="cart-item__price">6 800 ₴</span></div><button class="cart-item__remove" aria-label="Видалити">×</button></div>
+    </div>
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__total-row cart-drawer__total-row--final"><span>Разом</span><span>6 800 ₴</span></div>
+      <a href="checkout.html" class="btn btn--primary" style="width:100%">Оформити замовлення</a>
+    </div>
+  </aside>
+
+  <script src="src/js/main.js"></script>
+  <script>
+    document.querySelectorAll('.pdp-info .volume-toggle__btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.pdp-info .volume-toggle__btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const prices = { '30': '4 200', '50': '6 800', '100': '11 200' };
+        document.getElementById('pdpPrice').innerHTML = `${prices[btn.dataset.volume]} <span>₴</span>`;
+      });
+    });
+  </script>
+</body>
+</html>

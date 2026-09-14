@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Funny-Friends — Low-Fi Wireframes</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      padding: 40px;
+    }
+    h1 { margin-bottom: 8px; }
+    .subtitle { color: #666; margin-bottom: 32px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .card {
+      background: #fff;
+      border: 2px dashed #ccc;
+      border-radius: 8px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: #999; }
+    .card h2 { font-size: 18px; margin-bottom: 8px; }
+    .card p { font-size: 14px; color: #666; }
+    .tag {
+      display: inline-block;
+      background: #eee;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      margin-top: 12px;
+      margin-right: 4px;
+    }
+    .legend {
+      margin-top: 48px;
+      padding: 24px;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+    .legend h3 { margin-bottom: 16px; }
+    .legend-item { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; font-size: 14px; }
+    .box { width: 24px; height: 16px; border: 2px solid #999; background: #fafafa; }
+    .box-filled { background: #ddd; border-style: solid; }
+    .box-dashed { border-style: dashed; }
+  </style>
+</head>
+<body>
+  <h1>Funny-Friends Wireframes</h1>
+  <p class="subtitle">Low-Fi каркаси для десктопу та мобільних пристроїв</p>
+
+  <div class="grid">
+    <a class="card" href="desktop-home.html">
+      <h2>Головна — Desktop</h2>
+      <p>Hero, категорії, бестселери, Discovery Sets, відгуки</p>
+      <span class="tag">1440px</span>
+    </a>
+    <a class="card" href="mobile-home.html">
+      <h2>Головна — Mobile</h2>
+      <p>Адаптивна версія головної сторінки</p>
+      <span class="tag">375px</span>
+    </a>
+    <a class="card" href="desktop-catalog.html">
+      <h2>Каталог — Desktop</h2>
+      <p>Sticky фільтри, 3-col grid, сортування</p>
+      <span class="tag">1440px</span>
+    </a>
+    <a class="card" href="mobile-catalog.html">
+      <h2>Каталог — Mobile</h2>
+      <p>Bottom sheet фільтри, 1-col grid</p>
+      <span class="tag">375px</span>
+    </a>
+    <a class="card" href="desktop-pdp.html">
+      <h2>PDP — Desktop</h2>
+      <p>3D галерея, ольфакторна піраміда, volume selector</p>
+      <span class="tag">1440px</span>
+    </a>
+    <a class="card" href="mobile-pdp.html">
+      <h2>PDP — Mobile</h2>
+      <p>Swipe gallery, accordion pyramid</p>
+      <span class="tag">375px</span>
+    </a>
+    <a class="card" href="cart-drawer.html">
+      <h2>Cart Drawer + Checkout</h2>
+      <p>Slide-over cart, 3-step checkout flow</p>
+      <span class="tag">Overlay</span>
+    </a>
+    <a class="card" href="brand-page.html">
+      <h2>Про бренд</h2>
+      <p>Історія, парфумери, sourcing</p>
+      <span class="tag">1440px</span>
+    </a>
+  </div>
+
+  <div class="legend">
+    <h3>Легенда wireframe-елементів</h3>
+    <div class="legend-item"><div class="box box-dashed"></div> Placeholder / Image block</div>
+    <div class="legend-item"><div class="box box-filled"></div> Content block / Card</div>
+    <div class="legend-item"><div class="box" style="border-radius:50%"></div> Icon / Button</div>
+    <div class="legend-item"><span style="font-weight:bold; width:24px">══</span> Horizontal divider / Section break</div>
+  </div>
+</body>
+</html>

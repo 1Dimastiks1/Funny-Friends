@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375">
+  <title>Wireframe — PDP Mobile | Funny-Friends</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #e8e8e8; display: flex; justify-content: center; padding: 24px 0; }
+    .wf { width: 375px; background: #fff; min-height: 100vh; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+    .ph { background: repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 4px, #e8e8e8 4px, #e8e8e8 8px); border: 2px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #999; font-size: 10px; text-transform: uppercase; }
+    .block { background: #eee; border: 1px solid #ccc; }
+    .header { padding: 12px 16px; border-bottom: 2px solid #ddd; height: 64px; display:flex;justify-content:space-between;align-items:center; }
+    .gallery { height: 360px; }
+    .dots { display: flex; justify-content: center; gap: 6px; padding: 12px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; }
+    .info { padding: 16px; }
+    .title { width: 90%; height: 28px; background: #ccc; margin-bottom: 8px; }
+    .subtitle { width: 60%; height: 12px; background: #eee; margin-bottom: 12px; }
+    .price { width: 80px; height: 24px; background: #ddd; margin: 12px 0; }
+    .volume-toggle { display: flex; gap: 6px; margin: 12px 0; }
+    .volume-toggle span { flex:1; height: 36px; background: #eee; border: 1px solid #ccc; font-size: 10px; display:flex;align-items:center;justify-content:center; }
+    .sample { height: 44px; background: #f5f5f5; border: 1px dashed #bbb; margin: 12px 0; font-size: 10px; display:flex;align-items:center;justify-content:center; }
+    .cta { width: 100%; height: 48px; background: #ccc; margin-top: 12px; }
+    .accordion { margin-top: 24px; border-top: 1px solid #eee; }
+    .acc-item { padding: 16px 0; border-bottom: 1px solid #eee; }
+    .acc-title { width: 120px; height: 14px; background: #ccc; margin-bottom: 8px; }
+    .acc-content { width: 100%; height: 40px; background: #f5f5f5; }
+    .sticky-bar { position: sticky; bottom: 0; padding: 12px 16px; background: #fff; border-top: 2px solid #ddd; display: flex; gap: 12px; }
+    .sticky-bar .block { flex: 1; height: 44px; }
+    .annotation { position: fixed; top: 12px; right: 12px; background: #333; color: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; }
+    .back { position: fixed; top: 12px; left: 12px; background: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; text-decoration: none; color: #333; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <a class="back" href="index.html">← Wireframes</a>
+  <div class="annotation">Mobile 375px — PDP</div>
+  <div class="wf">
+    <header class="header"><div class="block" style="width:24px;height:18px"></div><div class="block" style="width:32px;height:32px;border-radius:50%"></div></header>
+    <div class="ph gallery">Swipe Gallery</div>
+    <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    <div class="info">
+      <div class="block title"></div>
+      <div class="block subtitle"></div>
+      <div class="block price"></div>
+      <div class="volume-toggle"><span>30</span><span>50</span><span>100</span></div>
+      <div class="sample">+ Пробник 2 ml</div>
+      <div class="accordion">
+        <div class="acc-item"><div class="acc-title">Olfactory Pyramid ▼</div><div class="acc-content"></div></div>
+        <div class="acc-item"><div class="acc-title">Ingredients ▼</div></div>
+        <div class="acc-item"><div class="acc-title">Reviews ▼</div></div>
+      </div>
+    </div>
+    <div class="sticky-bar"><div class="block" style="background:#e8e8e8"></div><div class="block"></div></div>
+  </div>
+</body>
+</html>

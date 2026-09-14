@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375">
+  <title>Wireframe — Home Mobile | Funny-Friends</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #e8e8e8; display: flex; justify-content: center; padding: 24px 0; }
+    .wf { width: 375px; background: #fff; min-height: 100vh; box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+    .ph { background: repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 4px, #e8e8e8 4px, #e8e8e8 8px); border: 2px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #999; font-size: 10px; text-transform: uppercase; }
+    .block { background: #eee; border: 1px solid #ccc; }
+
+    .header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 2px solid #ddd; height: 64px; }
+    .hamburger { width: 24px; height: 18px; background: #ccc; }
+    .logo { width: 100px; height: 24px; background: #bbb; }
+    .header-actions { display: flex; gap: 8px; }
+    .icon-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ccc; background: #f5f5f5; }
+
+    .hero { height: 480px; position: relative; }
+    .hero .ph { height: 100%; font-size: 9px; }
+    .hero-content { position: absolute; bottom: 32px; left: 16px; right: 16px; }
+    .hero-content .block { width: 100%; height: 36px; margin-bottom: 12px; }
+    .hero-content .block-sm { width: 80%; height: 12px; margin-bottom: 20px; }
+    .hero-btns { display: flex; flex-direction: column; gap: 8px; }
+    .hero-btns .block { width: 100%; height: 44px; }
+
+    .section { padding: 32px 16px; border-bottom: 1px solid #eee; }
+    .section-title { width: 70%; height: 24px; background: #ddd; margin-bottom: 6px; }
+    .section-sub { width: 90%; height: 12px; background: #eee; margin-bottom: 20px; }
+
+    .families { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .family-card { height: 100px; }
+
+    .product-card { border: 1px solid #ddd; padding: 12px; margin-bottom: 16px; }
+    .product-img { height: 200px; margin-bottom: 12px; }
+    .product-title { width: 80%; height: 14px; background: #ddd; margin-bottom: 6px; }
+    .volume-toggle { display: flex; gap: 4px; margin: 8px 0; }
+    .volume-toggle span { width: 36px; height: 22px; background: #eee; border: 1px solid #ccc; font-size: 9px; display:flex;align-items:center;justify-content:center; }
+    .product-footer { display: flex; justify-content: space-between; }
+    .add-btn { width: 90px; height: 32px; background: #ccc; }
+
+    .discovery .ph { height: 200px; margin-bottom: 16px; }
+    .discovery .block { height: 40px; margin-bottom: 8px; }
+
+    .trust { padding: 24px 16px; background: #f5f5f5; }
+    .trust-item { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .trust-icon { width: 40px; height: 40px; border-radius: 50%; background: #ddd; flex-shrink: 0; }
+    .trust-text .block { width: 100px; height: 12px; background: #ccc; margin-bottom: 4px; }
+    .trust-text .block-sm { width: 160px; height: 10px; background: #e0e0e0; }
+
+    .footer { padding: 24px 16px; background: #333; color: #999; font-size: 10px; text-align: center; }
+
+    .annotation { position: fixed; top: 12px; right: 12px; background: #333; color: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; }
+    .back { position: fixed; top: 12px; left: 12px; background: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; text-decoration: none; color: #333; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <a class="back" href="index.html">← Wireframes</a>
+  <div class="annotation">Mobile 375px — Home</div>
+
+  <div class="wf">
+    <header class="header">
+      <div class="hamburger"></div>
+      <div class="logo"></div>
+      <div class="header-actions">
+        <div class="icon-btn"></div>
+        <div class="icon-btn"></div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="ph">Hero Video</div>
+      <div class="hero-content">
+        <div class="block"></div>
+        <div class="block-sm"></div>
+        <div class="hero-btns">
+          <div class="block"></div>
+          <div class="block" style="background:#e8e8e8"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title"></div>
+      <div class="section-sub"></div>
+      <div class="families">
+        <div class="ph family-card">Floral</div>
+        <div class="ph family-card">Woody</div>
+        <div class="ph family-card">Oriental</div>
+        <div class="ph family-card">Fresh</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title"></div>
+      <div class="product-card">
+        <div class="ph product-img">3D Bottle</div>
+        <div class="product-title"></div>
+        <div class="volume-toggle"><span>30</span><span>50</span><span>100</span></div>
+        <div class="product-footer"><div class="block" style="width:50px;height:16px"></div><div class="add-btn"></div></div>
+      </div>
+      <div class="product-card">
+        <div class="ph product-img">3D Bottle</div>
+        <div class="product-title"></div>
+        <div class="volume-toggle"><span>30</span><span>50</span><span>100</span></div>
+        <div class="product-footer"><div class="block" style="width:50px;height:16px"></div><div class="add-btn"></div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title"></div>
+      <div class="discovery">
+        <div class="ph">Discovery Builder</div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block" style="width:120px;margin-top:12px"></div>
+      </div>
+    </section>
+
+    <div class="trust">
+      <div class="trust-item"><div class="trust-icon"></div><div class="trust-text"><div class="block"></div><div class="block-sm"></div></div></div>
+      <div class="trust-item"><div class="trust-icon"></div><div class="trust-text"><div class="block"></div><div class="block-sm"></div></div></div>
+      <div class="trust-item"><div class="trust-icon"></div><div class="trust-text"><div class="block"></div><div class="block-sm"></div></div></div>
+    </div>
+
+    <footer class="footer">Footer</footer>
+  </div>
+</body>
+</html>

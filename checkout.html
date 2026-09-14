@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оформлення — Funny-Friends</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <style>
+    .checkout { padding-top: calc(var(--header-height) + var(--space-12)); padding-bottom: var(--space-16); max-width: 720px; margin: 0 auto; }
+    .steps { display: flex; gap: var(--space-4); margin-bottom: var(--space-12); }
+    .step { flex: 1; text-align: center; padding: var(--space-4); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); transition: all var(--transition-fast); }
+    .step.active { border-color: var(--color-accent-gold-muted); background: rgba(212,175,55,0.08); }
+    .step.completed { border-color: var(--color-accent-gold-muted); opacity: 0.7; }
+    .step__num { width: 28px; height: 28px; border-radius: var(--radius-full); background: rgba(212,175,55,0.15); border: 1px solid var(--color-accent-gold-muted); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-2); font-size: var(--font-size-sm); color: var(--color-accent-gold); }
+    .step.active .step__num { background: var(--gradient-gold); color: var(--color-text-inverse); border: none; }
+    .step__label { font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+    .step.active .step__label { color: var(--color-text-primary); }
+    .form-section { margin-bottom: var(--space-8); }
+    .form-section__title { font-family: var(--font-serif); font-size: var(--font-size-xl); margin-bottom: var(--space-6); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+    .form-field { margin-bottom: var(--space-4); }
+    .form-field.full { grid-column: span 2; }
+    .form-field label { display: block; font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--space-2); }
+    .form-field input, .form-field select { width: 100%; height: 48px; padding: 0 var(--space-4); background: rgba(255,255,255,0.05); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); color: var(--color-text-primary); font-size: var(--font-size-base); }
+    .form-field input:focus, .form-field select:focus { outline: none; border-color: var(--color-accent-gold-muted); box-shadow: 0 0 0 3px var(--color-accent-gold-glow); }
+    .shipping-options { display: flex; flex-direction: column; gap: var(--space-3); }
+    .shipping-option { display: flex; align-items: center; justify-content: space-between; padding: var(--space-4); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); cursor: pointer; transition: all var(--transition-fast); }
+    .shipping-option:hover, .shipping-option.selected { border-color: var(--color-accent-gold-muted); background: rgba(212,175,55,0.05); }
+    .payment-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-bottom: var(--space-6); }
+    .payment-btn { height: 56px; background: rgba(255,255,255,0.05); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: var(--font-size-sm); color: var(--color-text-secondary); cursor: pointer; transition: all var(--transition-fast); }
+    .payment-btn:hover, .payment-btn.selected { border-color: var(--color-accent-gold); color: var(--color-accent-gold); }
+    .order-summary { padding: var(--space-6); margin-top: var(--space-8); }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: var(--space-2); font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+    .summary-row.total { font-size: var(--font-size-lg); color: var(--color-text-primary); font-weight: var(--font-weight-semibold); margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--color-border-subtle); }
+    .summary-row.total span:last-child { color: var(--color-accent-gold); font-family: var(--font-serif); }
+    @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } .form-field.full { grid-column: span 1; } .payment-methods { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="header__logo">Funny<span>-</span>Friends</a>
+    <div class="header__actions">
+      <button class="header__currency">UAH ▾</button>
+    </div>
+  </header>
+
+  <div class="container checkout">
+    <h1 style="font-family:var(--font-serif);font-size:var(--font-size-3xl);margin-bottom:var(--space-8);text-align:center">Оформлення замовлення</h1>
+
+    <div class="steps">
+      <div class="step active" data-step="1"><div class="step__num">1</div><div class="step__label">Адреса</div></div>
+      <div class="step" data-step="2"><div class="step__num">2</div><div class="step__label">Доставка</div></div>
+      <div class="step" data-step="3"><div class="step__num">3</div><div class="step__label">Оплата</div></div>
+    </div>
+
+    <!-- Step 1: Address -->
+    <div id="step1" class="checkout-step">
+      <div class="form-section">
+        <h2 class="form-section__title">Адреса доставки</h2>
+        <div class="form-grid">
+          <div class="form-field"><label>Ім'я</label><input type="text" placeholder="Олена"></div>
+          <div class="form-field"><label>Прізвище</label><input type="text" placeholder="Коваленко"></div>
+          <div class="form-field full"><label>Адреса</label><input type="text" placeholder="вул. Хрещатик, 1, кв. 10"></div>
+          <div class="form-field"><label>Місто</label><input type="text" placeholder="Київ"></div>
+          <div class="form-field"><label>Поштовий індекс</label><input type="text" placeholder="01001"></div>
+          <div class="form-field full"><label>Телефон</label><input type="tel" placeholder="+380 XX XXX XX XX"></div>
+        </div>
+        <button class="btn btn--primary btn--lg" onclick="goToStep(2)" style="margin-top:var(--space-4)">Продовжити до доставки</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Shipping -->
+    <div id="step2" class="checkout-step" style="display:none">
+      <div class="form-section">
+        <h2 class="form-section__title">Спосіб доставки</h2>
+        <div class="shipping-options">
+          <div class="shipping-option selected"><div><strong>Nova Poshta</strong><br><span style="font-size:var(--font-size-sm);color:var(--color-text-muted)">1–3 дні</span></div><span>150 ₴</span></div>
+          <div class="shipping-option"><div><strong>Кур'єр по Києву</strong><br><span style="font-size:var(--font-size-sm);color:var(--color-text-muted)">Наступний день</span></div><span>200 ₴</span></div>
+          <div class="shipping-option"><div><strong>Самовивіз (Showroom)</strong><br><span style="font-size:var(--font-size-sm);color:var(--color-text-muted)">Безкоштовно</span></div><span>0 ₴</span></div>
+        </div>
+        <button class="btn btn--primary btn--lg" onclick="goToStep(3)" style="margin-top:var(--space-6)">Продовжити до оплати</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Payment -->
+    <div id="step3" class="checkout-step" style="display:none">
+      <div class="form-section">
+        <h2 class="form-section__title">Спосіб оплати</h2>
+        <div class="payment-methods">
+          <button class="payment-btn selected"> Apple Pay</button>
+          <button class="payment-btn">Google Pay</button>
+          <button class="payment-btn">💳 Картка</button>
+        </div>
+        <div class="form-grid">
+          <div class="form-field full"><label>Номер картки</label><input type="text" placeholder="4242 4242 4242 4242"></div>
+          <div class="form-field"><label>Термін дії</label><input type="text" placeholder="MM/YY"></div>
+          <div class="form-field"><label>CVV</label><input type="text" placeholder="123"></div>
+        </div>
+        <button class="btn btn--primary btn--lg" style="width:100%;margin-top:var(--space-6)">Оплатити 12 350 ₴</button>
+      </div>
+    </div>
+
+    <div class="glass-panel order-summary">
+      <h3 style="font-family:var(--font-serif);margin-bottom:var(--space-4)">Ваше замовлення</h3>
+      <div class="summary-row"><span>Nocturne Oud · 50 ml</span><span>6 800 ₴</span></div>
+      <div class="summary-row"><span>Velvet Rose · 50 ml</span><span>5 400 ₴</span></div>
+      <div class="summary-row"><span>Доставка</span><span>150 ₴</span></div>
+      <div class="summary-row total"><span>Разом</span><span>12 350 ₴</span></div>
+    </div>
+  </div>
+
+  <script>
+    function goToStep(n) {
+      document.querySelectorAll('.checkout-step').forEach(s => s.style.display = 'none');
+      document.getElementById('step' + n).style.display = 'block';
+      document.querySelectorAll('.step').forEach((s, i) => {
+        s.classList.remove('active', 'completed');
+        if (i + 1 < n) s.classList.add('completed');
+        if (i + 1 === n) s.classList.add('active');
+      });
+    }
+  </script>
+</body>
+</html>

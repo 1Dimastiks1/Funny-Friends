@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe — Brand Page | Funny-Friends</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #e8e8e8; color: #555; }
+    .wf { max-width: 1440px; margin: 0 auto; background: #fff; min-height: 100vh; }
+    .ph { background: repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 4px, #e8e8e8 4px, #e8e8e8 8px); border: 2px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #999; font-size: 11px; text-transform: uppercase; }
+    .block { background: #eee; border: 1px solid #ccc; }
+    .header { padding: 16px 48px; border-bottom: 2px solid #ddd; height: 72px; }
+    .hero { height: 400px; }
+    .section { padding: 64px 48px; border-bottom: 1px solid #eee; }
+    .section-title { width: 300px; height: 32px; background: #ddd; margin-bottom: 16px; }
+    .text-block { width: 60%; height: 14px; background: #eee; margin-bottom: 8px; }
+    .perfumers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 32px; }
+    .perfumer { text-align: center; }
+    .perfumer-img { width: 160px; height: 160px; border-radius: 50%; background: #f0f0f0; border: 2px dashed #bbb; margin: 0 auto 16px; }
+    .timeline { display: flex; gap: 24px; margin-top: 32px; overflow-x: auto; }
+    .timeline-item { min-width: 200px; padding: 24px; border: 1px solid #ddd; }
+    .sourcing { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .annotation { position: fixed; top: 12px; right: 12px; background: #333; color: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; }
+    .back { position: fixed; top: 12px; left: 12px; background: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; text-decoration: none; color: #333; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <a class="back" href="index.html">← Wireframes</a>
+  <div class="annotation">Desktop 1440px — Brand Story</div>
+  <div class="wf">
+    <header class="header"><div class="block" style="width:140px;height:32px"></div></header>
+    <div class="ph hero">Brand Heritage Hero</div>
+    <section class="section">
+      <div class="section-title"></div>
+      <div class="text-block"></div><div class="text-block"></div><div class="text-block" style="width:40%"></div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="block" style="width:60px;height:12px;margin-bottom:8px"></div><div class="block" style="height:40px"></div></div>
+        <div class="timeline-item"><div class="block" style="width:60px;height:12px;margin-bottom:8px"></div><div class="block" style="height:40px"></div></div>
+        <div class="timeline-item"><div class="block" style="width:60px;height:12px;margin-bottom:8px"></div><div class="block" style="height:40px"></div></div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section-title"></div>
+      <div class="perfumers">
+        <div class="perfumer"><div class="perfumer-img"></div><div class="block" style="width:100px;height:14px;margin:0 auto 8px"></div><div class="block" style="width:140px;height:10px;margin:0 auto"></div></div>
+        <div class="perfumer"><div class="perfumer-img"></div><div class="block" style="width:100px;height:14px;margin:0 auto 8px"></div><div class="block" style="width:140px;height:10px;margin:0 auto"></div></div>
+        <div class="perfumer"><div class="perfumer-img"></div><div class="block" style="width:100px;height:14px;margin:0 auto 8px"></div><div class="block" style="width:140px;height:10px;margin:0 auto"></div></div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="sourcing">
+        <div class="ph" style="height:360px">Rare Ingredients Map</div>
+        <div><div class="section-title" style="width:200px"></div><div class="text-block"></div><div class="text-block"></div><div class="text-block" style="width:80%"></div></div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

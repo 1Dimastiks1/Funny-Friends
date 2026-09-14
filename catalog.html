@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог — Funny-Friends</title>
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <style>
+    .catalog-layout { display: grid; grid-template-columns: var(--sidebar-width) 1fr; gap: var(--space-8); padding-top: calc(var(--header-height) + var(--space-12)); padding-bottom: var(--space-16); }
+    .filters { position: sticky; top: calc(var(--header-height) + var(--space-8)); align-self: start; padding: var(--space-6); }
+    .filter-group { margin-bottom: var(--space-6); padding-bottom: var(--space-6); border-bottom: 1px solid var(--color-border-subtle); }
+    .filter-group:last-child { border-bottom: none; }
+    .filter-group__title { font-size: var(--font-size-sm); letter-spacing: var(--letter-spacing-wide); text-transform: uppercase; color: var(--color-text-primary); margin-bottom: var(--space-4); }
+    .filter-checkbox { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) 0; cursor: pointer; font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+    .filter-checkbox input { accent-color: var(--color-accent-gold); width: 16px; height: 16px; }
+    .filter-checkbox:hover { color: var(--color-text-primary); }
+    .price-slider { width: 100%; margin: var(--space-4) 0; accent-color: var(--color-accent-gold); }
+    .price-range { display: flex; justify-content: space-between; font-size: var(--font-size-sm); color: var(--color-text-muted); }
+    .catalog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-6); }
+    .breadcrumb { font-size: var(--font-size-sm); color: var(--color-text-muted); }
+    .breadcrumb a { color: var(--color-text-secondary); }
+    .sort-select { padding: var(--space-2) var(--space-4); background: rgba(255,255,255,0.05); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); color: var(--color-text-secondary); font-size: var(--font-size-sm); }
+    .results-count { font-size: var(--font-size-sm); color: var(--color-text-muted); margin-bottom: var(--space-4); }
+    @media (max-width: 1024px) {
+      .catalog-layout { grid-template-columns: 1fr; }
+      .filters { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="header__logo">Funny<span>-</span>Friends</a>
+    <nav class="header__nav">
+      <a href="index.html">Головна</a>
+      <a href="catalog.html" class="active">Каталог</a>
+      <a href="brand.html">Про бренд</a>
+      <a href="#">Discovery Sets</a>
+    </nav>
+    <div class="header__actions">
+      <div class="header__search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" placeholder="Пошук ароматів...">
+      </div>
+      <button class="header__currency">UAH ▾</button>
+      <button class="header__icon-btn">♡</button>
+      <button class="header__cart" data-cart-open>Кошик <span class="header__cart-badge">2</span></button>
+    </div>
+  </header>
+
+  <div class="container catalog-layout">
+    <aside class="glass-panel filters">
+      <div class="filter-group">
+        <h3 class="filter-group__title">Ціна</h3>
+        <input type="range" class="price-slider" min="500" max="15000" value="8000">
+        <div class="price-range"><span>500 ₴</span><span>15 000 ₴</span></div>
+      </div>
+      <div class="filter-group">
+        <h3 class="filter-group__title">Ноти ароматів</h3>
+        <label class="filter-checkbox"><input type="checkbox" checked> Oud</label>
+        <label class="filter-checkbox"><input type="checkbox"> Vanilla</label>
+        <label class="filter-checkbox"><input type="checkbox"> Amber</label>
+        <label class="filter-checkbox"><input type="checkbox"> Citrus</label>
+        <label class="filter-checkbox"><input type="checkbox"> Rose</label>
+        <label class="filter-checkbox"><input type="checkbox"> Sandalwood</label>
+      </div>
+      <div class="filter-group">
+        <h3 class="filter-group__title">Концентрація</h3>
+        <label class="filter-checkbox"><input type="checkbox" checked> EDP</label>
+        <label class="filter-checkbox"><input type="checkbox"> Parfum</label>
+        <label class="filter-checkbox"><input type="checkbox"> EDT</label>
+      </div>
+      <div class="filter-group">
+        <h3 class="filter-group__title">Об'єм</h3>
+        <label class="filter-checkbox"><input type="checkbox"> 30 ml</label>
+        <label class="filter-checkbox"><input type="checkbox" checked> 50 ml</label>
+        <label class="filter-checkbox"><input type="checkbox"> 100 ml</label>
+      </div>
+      <div class="filter-group">
+        <h3 class="filter-group__title">Наявність</h3>
+        <label class="filter-checkbox"><input type="checkbox" checked> В наявності</label>
+      </div>
+    </aside>
+
+    <main>
+      <div class="catalog-header">
+        <nav class="breadcrumb"><a href="index.html">Головна</a> / Каталог</nav>
+        <select class="sort-select">
+          <option value="За популярністю">За популярністю</option>
+          <option value="Ціна: від низької">Ціна: від низької</option>
+          <option value="Ціна: від високої">Ціна: від високої</option>
+          <option value="Новинки">Новинки</option>
+        </select>
+      </div>
+      <p class="results-count">Знайдено 12 ароматів</p>
+
+      <div class="products-grid">
+        <article class="glass-panel product-card">
+          <button class="product-card__wishlist">♡</button>
+          <a href="product.html"><div class="product-card__image"><div class="product-card__bottle"></div></div></a>
+          <p class="product-card__category">Oriental Woody</p>
+          <h3 class="product-card__name"><a href="product.html">Nocturne Oud</a></h3>
+          <div class="product-card__rating"><span class="star">★</span> 4.9</div>
+          <span class="product-card__urgency">Залишилося 3 шт.</span>
+          <div class="volume-toggle">
+            <button class="volume-toggle__btn" data-volume="30">30 ml</button>
+            <button class="volume-toggle__btn active" data-volume="50">50 ml</button>
+            <button class="volume-toggle__btn" data-volume="100">100 ml</button>
+          </div>
+          <div class="product-card__footer">
+            <span class="product-card__price">6 800 <span class="product-card__price-currency">₴</span></span>
+            <button class="btn btn--primary btn--sm" onclick="addToCart('Nocturne Oud')">+ У кошик</button>
+          </div>
+        </article>
+        <article class="glass-panel product-card">
+          <button class="product-card__wishlist">♡</button>
+          <div class="product-card__image"><div class="product-card__bottle" style="background:linear-gradient(180deg,rgba(229,193,88,0.2) 0%,rgba(5,5,5,1) 100%)"></div></div>
+          <p class="product-card__category">Floral Amber</p>
+          <h3 class="product-card__name">Velvet Rose</h3>
+          <div class="product-card__rating"><span class="star">★</span> 4.9</div>
+          <span class="product-card__urgency">Залишилося 2 шт.</span>
+          <div class="volume-toggle">
+            <button class="volume-toggle__btn" data-volume="30">30 ml</button>
+            <button class="volume-toggle__btn active" data-volume="50">50 ml</button>
+            <button class="volume-toggle__btn" data-volume="100">100 ml</button>
+          </div>
+          <div class="product-card__footer">
+            <span class="product-card__price">5 400 <span class="product-card__price-currency">₴</span></span>
+            <button class="btn btn--primary btn--sm">+ У кошик</button>
+          </div>
+        </article>
+        <article class="glass-panel product-card">
+          <div class="product-card__image"><div class="product-card__bottle" style="background:linear-gradient(180deg,rgba(180,200,220,0.15) 0%,rgba(5,5,5,1) 100%)"></div></div>
+          <p class="product-card__category">Fresh Citrus</p>
+          <h3 class="product-card__name">Azure Bergamot</h3>
+          <div class="product-card__rating"><span class="star">★</span> 4.8</div>
+          <div class="volume-toggle">
+            <button class="volume-toggle__btn" data-volume="30">30 ml</button>
+            <button class="volume-toggle__btn active" data-volume="50">50 ml</button>
+            <button class="volume-toggle__btn" data-volume="100">100 ml</button>
+          </div>
+          <div class="product-card__footer">
+            <span class="product-card__price">4 800 <span class="product-card__price-currency">₴</span></span>
+            <button class="btn btn--primary btn--sm">+ У кошик</button>
+          </div>
+        </article>
+        <article class="glass-panel product-card">
+          <div class="product-card__image"><div class="product-card__bottle" style="background:linear-gradient(180deg,rgba(200,150,100,0.2) 0%,rgba(5,5,5,1) 100%)"></div></div>
+          <p class="product-card__category">Gourmand</p>
+          <h3 class="product-card__name">Golden Vanilla</h3>
+          <div class="product-card__rating"><span class="star">★</span> 4.9</div>
+          <div class="volume-toggle">
+            <button class="volume-toggle__btn" data-volume="30">30 ml</button>
+            <button class="volume-toggle__btn active" data-volume="50">50 ml</button>
+            <button class="volume-toggle__btn" data-volume="100">100 ml</button>
+          </div>
+          <div class="product-card__footer">
+            <span class="product-card__price">5 200 <span class="product-card__price-currency">₴</span></span>
+            <button class="btn btn--primary btn--sm">+ У кошик</button>
+          </div>
+        </article>
+        <article class="glass-panel product-card">
+          <div class="product-card__image"><div class="product-card__bottle"></div></div>
+          <p class="product-card__category">Woody</p>
+          <h3 class="product-card__name">Santal Noir</h3>
+          <div class="product-card__rating"><span class="star">★</span> 4.7</div>
+          <div class="volume-toggle">
+            <button class="volume-toggle__btn" data-volume="30">30 ml</button>
+            <button class="volume-toggle__btn active" data-volume="50">50 ml</button>
+            <button class="volume-toggle__btn" data-volume="100">100 ml</button>
+          </div>
+          <div class="product-card__footer">
+            <span class="product-card__price">6 200 <span class="product-card__price-currency">₴</span></span>
+            <button class="btn btn--primary btn--sm">+ У кошик</button>
+          </div>
+        </article>
+        <article class="glass-panel product-card">
+          <div class="product-card__image"><div class="product-card__bottle" style="background:linear-gradient(180deg,rgba(150,180,150,0.15) 0%,rgba(5,5,5,1) 100%)"></div></div>
+          <p class="product-card__category">Chypre</p>
+          <h3 class="product-card__name">Moss & Iris</h3>
+          <div class="product-card__rating"><span class="star">★</span> 4.8</div>
+          <div class="volume-toggle">
+            <button class="volume-toggle__btn" data-volume="30">30 ml</button>
+            <button class="volume-toggle__btn active" data-volume="50">50 ml</button>
+            <button class="volume-toggle__btn" data-volume="100">100 ml</button>
+          </div>
+          <div class="product-card__footer">
+            <span class="product-card__price">5 600 <span class="product-card__price-currency">₴</span></span>
+            <button class="btn btn--primary btn--sm">+ У кошик</button>
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  <div class="cart-overlay" id="cartOverlay" data-cart-close></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer__header">
+      <h2 class="cart-drawer__title">Кошик (2)</h2>
+      <button class="cart-drawer__close" data-cart-close>✕</button>
+    </div>
+    <div class="cart-drawer__progress">
+      <p class="cart-drawer__progress-text">До безкоштовної доставки залишилося 400 ₴</p>
+      <div class="cart-drawer__progress-bar"><div class="cart-drawer__progress-fill"></div></div>
+    </div>
+    <div class="cart-drawer__items">
+      <div class="cart-item"><div class="cart-item__image"></div><div><h4 class="cart-item__name">Nocturne Oud</h4><p class="cart-item__meta">50 ml</p><span class="cart-item__price">6 800 ₴</span></div><button class="cart-item__remove" aria-label="Видалити">×</button></div>
+      <div class="cart-item"><div class="cart-item__image"></div><div><h4 class="cart-item__name">Velvet Rose</h4><p class="cart-item__meta">50 ml</p><span class="cart-item__price">5 400 ₴</span></div><button class="cart-item__remove" aria-label="Видалити">×</button></div>
+    </div>
+    <div class="cart-drawer__sample">🎁 Оберіть подарунковий пробник ▾</div>
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__total-row cart-drawer__total-row--final"><span>Разом</span><span>12 350 ₴</span></div>
+      <a href="checkout.html" class="btn btn--primary" style="width:100%">Оформити замовлення</a>
+    </div>
+  </aside>
+
+  <script src="src/js/main.js"></script>
+</body>
+</html>

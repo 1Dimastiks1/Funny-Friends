@@ -1,0 +1,145 @@
+/**
+ * Funny-Friends Design System
+ * Ultra-Luxury Liquid Glass & Gold
+ * =================================
+ */
+
+:root {
+  /* ─── Color Palette ─── */
+  --color-bg-primary: #050505;
+  --color-bg-secondary: #121212;
+  --color-bg-glass: rgba(18, 18, 18, 0.65);
+  --color-bg-glass-hover: rgba(24, 24, 24, 0.75);
+  --color-bg-glass-active: rgba(30, 30, 30, 0.85);
+
+  --color-accent-gold: #D4AF37;
+  --color-accent-champagne: #E5C158;
+  --color-accent-gold-muted: rgba(212, 175, 55, 0.25);
+  --color-accent-gold-glow: rgba(212, 175, 55, 0.15);
+
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #A1A1AA;
+  --color-text-muted: #71717A;
+  --color-text-inverse: #050505;
+
+  --color-border-glass: rgba(212, 175, 55, 0.25);
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-urgency: #E5C158;
+
+  /* ─── Gradients ─── */
+  --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #E5C158 50%, #D4AF37 100%);
+  --gradient-gold-hover: linear-gradient(135deg, #E5C158 0%, #F0D878 50%, #E5C158 100%);
+  --gradient-glass-shine: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(212, 175, 55, 0.05) 100%
+  );
+  --gradient-hero-overlay: linear-gradient(
+    180deg,
+    rgba(5, 5, 5, 0.3) 0%,
+    rgba(5, 5, 5, 0.7) 60%,
+    #050505 100%
+  );
+
+  /* ─── Typography ─── */
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', 'Montserrat', system-ui, sans-serif;
+
+  --font-size-xs: 0.75rem;      /* 12px */
+  --font-size-sm: 0.875rem;     /* 14px */
+  --font-size-base: 1rem;       /* 16px */
+  --font-size-lg: 1.125rem;     /* 18px */
+  --font-size-xl: 1.25rem;      /* 20px */
+  --font-size-2xl: 1.5rem;      /* 24px */
+  --font-size-3xl: 2rem;        /* 32px */
+  --font-size-4xl: 2.5rem;      /* 40px */
+  --font-size-5xl: 3.5rem;      /* 56px */
+  --font-size-hero: clamp(2.5rem, 5vw, 4.5rem);
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.15;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-wide: 0.08em;
+  --letter-spacing-wider: 0.15em;
+
+  /* ─── Spacing Scale ─── */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+
+  /* ─── Layout ─── */
+  --container-max: 1440px;
+  --container-narrow: 960px;
+  --header-height: 72px;
+  --header-height-mobile: 64px;
+  --sidebar-width: 280px;
+  --cart-drawer-width: 420px;
+  --grid-columns: 3;
+  --grid-gap: var(--space-6);
+
+  /* ─── Border Radius ─── */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ─── Liquid Glass Effects ─── */
+  --glass-blur: blur(24px);
+  --glass-blur-heavy: blur(40px);
+  --glass-background: rgba(18, 18, 18, 0.65);
+  --glass-border: 1px solid rgba(212, 175, 55, 0.25);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                  0 0 0 1px rgba(212, 175, 55, 0.08),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --glass-shadow-gold: 0 0 24px rgba(212, 175, 55, 0.12),
+                       0 8px 32px rgba(0, 0, 0, 0.5);
+
+  /* ─── Buttons ─── */
+  --btn-height: 48px;
+  --btn-height-sm: 40px;
+  --btn-height-lg: 56px;
+  --btn-padding-x: var(--space-6);
+  --btn-radius: var(--radius-md);
+
+  /* ─── Transitions ─── */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-liquid: 600ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* ─── Z-Index Scale ─── */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-header: 300;
+  --z-drawer: 400;
+  --z-modal: 500;
+  --z-toast: 600;
+
+  /* ─── Breakpoints (for reference in JS) ─── */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe — PDP Desktop | Funny-Friends</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #e8e8e8; color: #555; }
+    .wf { max-width: 1440px; margin: 0 auto; background: #fff; min-height: 100vh; }
+    .ph { background: repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 4px, #e8e8e8 4px, #e8e8e8 8px); border: 2px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #999; font-size: 11px; text-transform: uppercase; }
+    .block { background: #eee; border: 1px solid #ccc; }
+    .header { padding: 16px 48px; border-bottom: 2px solid #ddd; height: 72px; display:flex;justify-content:space-between;align-items:center; }
+    .layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; padding: 48px; }
+    .gallery { height: 560px; }
+    .thumbs { display: flex; gap: 12px; margin-top: 16px; }
+    .thumb { width: 80px; height: 80px; background: #f0f0f0; border: 1px solid #ccc; }
+    .product-info .block { margin-bottom: 12px; }
+    .title { width: 80%; height: 32px; background: #ccc; }
+    .subtitle { width: 50%; height: 14px; background: #eee; }
+    .rating { width: 80px; height: 16px; background: #ffe0b2; margin: 16px 0; }
+    .price { width: 100px; height: 28px; background: #ddd; margin: 16px 0; }
+    .volume-toggle { display: flex; gap: 8px; margin: 16px 0; }
+    .volume-toggle span { width: 60px; height: 36px; background: #eee; border: 1px solid #ccc; display:flex;align-items:center;justify-content:center;font-size:11px; }
+    .sample { width: 100%; height: 48px; background: #f5f5f5; border: 1px dashed #bbb; margin: 16px 0; display:flex;align-items:center;justify-content:center;font-size:11px; }
+    .cta { width: 100%; height: 52px; background: #ccc; margin-top: 16px; }
+    .pyramid { margin-top: 48px; padding: 32px; border: 2px solid #ddd; }
+    .pyramid-title { width: 200px; height: 20px; background: #ccc; margin-bottom: 24px; }
+    .pyramid-level { display: flex; justify-content: center; margin-bottom: 8px; }
+    .pyramid-level .block { height: 48px; }
+    .level-top { width: 120px; }
+    .level-heart { width: 200px; }
+    .level-base { width: 280px; }
+    .similar { padding: 48px; border-top: 1px solid #eee; }
+    .similar-title { width: 200px; height: 24px; background: #ddd; margin-bottom: 24px; }
+    .similar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .similar-card { height: 200px; border: 1px solid #ddd; }
+    .annotation { position: fixed; top: 12px; right: 12px; background: #333; color: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; }
+    .back { position: fixed; top: 12px; left: 12px; background: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; text-decoration: none; color: #333; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <a class="back" href="index.html">← Wireframes</a>
+  <div class="annotation">Desktop 1440px — Product Detail</div>
+  <div class="wf">
+    <header class="header"><div class="block" style="width:140px;height:32px"></div><div class="block" style="width:100px;height:36px"></div></header>
+    <div class="layout">
+      <div>
+        <div class="ph gallery">3D Bottle Gallery — 360° Rotate</div>
+        <div class="thumbs"><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div></div>
+      </div>
+      <div class="product-info">
+        <div class="block title"></div>
+        <div class="block subtitle"></div>
+        <div class="block rating">4.9 ★</div>
+        <div class="block" style="width:100%;height:60px;background:#f9f9f9"></div>
+        <div class="block price"></div>
+        <div class="volume-toggle"><span>30 ml</span><span>50 ml</span><span>100 ml</span></div>
+        <div class="sample">+ Безкоштовний пробник 2 ml</div>
+        <div class="block cta"></div>
+        <div class="pyramid">
+          <div class="pyramid-title">Olfactory Pyramid</div>
+          <div class="pyramid-level"><div class="block level-top">Top: Bergamot</div></div>
+          <div class="pyramid-level"><div class="block level-heart">Heart: Rose</div></div>
+          <div class="pyramid-level"><div class="block level-base">Base: Oud, Amber</div></div>
+        </div>
+      </div>
+    </div>
+    <section class="similar">
+      <div class="similar-title"></div>
+      <div class="similar-grid">
+        <div class="ph similar-card">Similar</div>
+        <div class="ph similar-card">Similar</div>
+        <div class="ph similar-card">Similar</div>
+        <div class="ph similar-card">Similar</div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

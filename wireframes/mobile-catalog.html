@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375">
+  <title>Wireframe — Catalog Mobile | Funny-Friends</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #e8e8e8; display: flex; justify-content: center; padding: 24px 0; }
+    .wf { width: 375px; background: #fff; min-height: 100vh; box-shadow: 0 4px 24px rgba(0,0,0,0.15); position: relative; }
+    .ph { background: repeating-linear-gradient(45deg, #f0f0f0, #f0f0f0 4px, #e8e8e8 4px, #e8e8e8 8px); border: 2px dashed #bbb; display: flex; align-items: center; justify-content: center; color: #999; font-size: 10px; text-transform: uppercase; }
+    .block { background: #eee; border: 1px solid #ccc; }
+    .header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 2px solid #ddd; height: 64px; }
+    .filter-bar { display: flex; gap: 8px; padding: 12px 16px; border-bottom: 1px solid #eee; }
+    .filter-btn { flex: 1; height: 36px; background: #f5f5f5; border: 1px solid #ccc; font-size: 11px; display:flex;align-items:center;justify-content:center; }
+    .products { padding: 16px; }
+    .product-card { border: 1px solid #ddd; padding: 12px; margin-bottom: 16px; }
+    .product-img { height: 180px; margin-bottom: 10px; }
+    .product-title { width: 80%; height: 14px; background: #ddd; margin-bottom: 6px; }
+    .badge { width: 80px; height: 16px; background: #ffe0b2; margin-bottom: 6px; font-size: 8px; display:flex;align-items:center;justify-content:center; }
+    .volume-toggle { display: flex; gap: 4px; margin: 6px 0; }
+    .volume-toggle span { width: 32px; height: 20px; background: #eee; border: 1px solid #ccc; font-size: 8px; display:flex;align-items:center;justify-content:center; }
+    .product-footer { display: flex; justify-content: space-between; }
+    .add-btn { width: 80px; height: 30px; background: #ccc; }
+    .filter-sheet { position: absolute; bottom: 0; left: 0; right: 0; height: 60%; background: #fff; border-top: 2px solid #333; padding: 20px 16px; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); }
+    .filter-sheet .block { height: 20px; margin-bottom: 8px; }
+    .annotation { position: fixed; top: 12px; right: 12px; background: #333; color: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; }
+    .back { position: fixed; top: 12px; left: 12px; background: #fff; padding: 8px 16px; border-radius: 4px; font-size: 12px; text-decoration: none; color: #333; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <a class="back" href="index.html">← Wireframes</a>
+  <div class="annotation">Mobile 375px — Catalog</div>
+  <div class="wf">
+    <header class="header"><div class="block" style="width:24px;height:18px"></div><div class="block" style="width:80px;height:20px"></div><div class="block" style="width:32px;height:32px;border-radius:50%"></div></header>
+    <div class="filter-bar"><div class="filter-btn">Фільтри ▼</div><div class="filter-btn">Сортування</div></div>
+    <div class="products">
+      <div class="product-card"><div class="ph product-img">3D</div><div class="product-title"></div><div class="badge">3 шт.</div><div class="volume-toggle"><span>30</span><span>50</span><span>100</span></div><div class="product-footer"><div class="block" style="width:50px;height:14px"></div><div class="add-btn"></div></div></div>
+      <div class="product-card"><div class="ph product-img">3D</div><div class="product-title"></div><div class="volume-toggle"><span>30</span><span>50</span><span>100</span></div><div class="product-footer"><div class="block" style="width:50px;height:14px"></div><div class="add-btn"></div></div></div>
+    </div>
+    <div class="filter-sheet">
+      <div style="font-size:12px;font-weight:bold;margin-bottom:16px">Фільтри</div>
+      <div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div>
+      <div class="block" style="width:100%;height:40px;margin-top:16px;background:#ccc"></div>
+    </div>
+  </div>
+</body>
+</html>

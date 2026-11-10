@@ -1,185 +1,128 @@
 import * as React from "react"
-import { GlassFold } from "@/components/ui/glass-fold"
 import { addToCart } from "./brand"
-import { byId } from "./data"
-import { initStory } from "./story-motion"
+import { Bottle } from "./bottle"
+import { STORY, fromPrice, uah } from "./data"
 
-const words = (s: string, cls: string) =>
-  s.split(" ").map((w, i) => (
-    <React.Fragment key={i}>
-      <span className={cls}>{w}</span>{" "}
-    </React.Fragment>
-  ))
+const SEG = 1.5 // висота сцени на один аромат
+const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v))
+const out = (t: number) => 1 - Math.pow(1 - t, 3)
 
-const NOTE_TEXT =
-  "Bleu de Chanel відкривається грейпфрутом і м'ятою, а за годину осідає ладаном, кедром і сандалом. Свіжо вдень, глибоко ввечері."
-
-/* точки нот — у координатах самого флакона */
-const SPOTS = [
-  { l: "64%", t: "6%", k: "Верхні ноти", v: "грейпфрут · м'ята", flip: true },
-  { l: "97%", t: "44%", k: "Серце", v: "імбир · жасмин", flip: true },
-  { l: "3%", t: "62%", k: "База", v: "ладан · кедр", flip: true },
-  { l: "96%", t: "90%", k: "Стійкість", v: "8–10 годин", flip: true },
-]
-
-const FEATS = [
-  "Офіційні дистриб'ютори ЄС",
-  "Батч-код і дата виробництва",
-  "Фото флакона перед відправкою",
-  "Оплата при отриманні",
-  "Повернення протягом 14 днів",
-]
-
+/**
+ * Скрол-історія (дизайн-система: ScrollStory): сцена закріплена, кожен аромат
+ * виїжджає справа, попередній іде вліво; зліва рядок за рядком проявляється
+ * опис. Наприкінці сцена розсипається на точки й відкриває каталог.
+ */
 export function Story() {
   const root = React.useRef<HTMLElement>(null)
-  React.useEffect(() => (root.current ? initStory(root.current) : undefined), [])
-  const [spot, setSpot] = React.useState(-1)
-  const [feat, setFeat] = React.useState(-1)
-  const bleu = byId("bleu")
+  const stage = React.useRef<HTMLDivElement>(null)
+  const dotsRef = React.useRef<HTMLCanvasElement>(null)
+  const [active, setActive] = React.useState(0)
+  const [on, setOn] = React.useState(true)
+  const [hint, setHint] = React.useState(true)
+  const N = STORY.length
+
+  React.useEffect(() => {
+    const sec = root.current, st = stage.current, cv = dotsRef.current
+    if (!sec || !st || !cv) return
+    const ctx = cv.getContext("2d")
+    const bottles = Array.from(st.querySelectorAll<HTMLElement>(".ov-story__bottle"))
+    const bar = st.querySelector<HTMLElement>(".ov-story__bar i")
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches
+    const dotColor = getComputedStyle(st).getPropertyValue("--surface-100").trim() || "#070b14"
+    let raf = 0, visible = false, lastP = -1, t0 = performance.now()
+    let cur = { a: -1, on: true, hint: true }
+
+    const size = () => {
+      const d = Math.min(devicePixelRatio || 1, 2)
+      cv.width = st.clientWidth * d
+      cv.height = st.clientHeight * d
+      lastP = -1
+    }
+    const dots = (p: number) => {
+      if (!ctx || Math.abs(p - lastP) < 0.002) return
+      lastP = p
+      const d = cv.width / st.clientWidth, cell = 4 * d, r = p * cell * 0.75
+      ctx.clearRect(0, 0, cv.width, cv.height)
+      if (p <= 0) return
+      ctx.fillStyle = dotColor
+      ctx.beginPath()
+      for (let y = cell / 2; y < cv.height + cell; y += cell)
+        for (let x = cell / 2; x < cv.width + cell; x += cell) { ctx.moveTo(x + r, y); ctx.arc(x, y, r, 0, Math.PI * 2) }
+      ctx.fill()
+    }
+    const frame = (now: number) => {
+      raf = requestAnimationFrame(frame)
+      if (!visible) return
+      const h = st.clientHeight, w = st.clientWidth
+      const P = Math.max(0, -sec.getBoundingClientRect().top) / (h * SEG)
+      const breathe = Math.sin((now - t0) / 900) * 4
+      const a = clamp(Math.round(P), 0, N - 1)
+      bottles.forEach((el, i) => {
+        const u = P - i
+        let x = 0, y = breathe, rot = -12, s = 1, o = 1
+        if (u < -0.12) {
+          const e = out(clamp((u + 0.5) / 0.38, 0, 1))
+          x = (1 - e) * w * 0.6; rot = -12 + (1 - e) * 36; s = 0.88 + 0.12 * e; o = clamp(e * 1.6, 0, 1); y = 0
+        } else if (u > 0.12 && i < N - 1) {
+          const k = clamp((u - 0.12) / 0.38, 0, 1), ek = k * k
+          x = -w * 0.4 * ek; y = -40 * ek; rot = -12 - 28 * ek; s = 1 - 0.15 * ek; o = 1 - k
+        }
+        if (reduce) { x = 0; y = 0; rot = -12; s = 1; o = Math.abs(u) < 0.5 ? 1 : 0 }
+        el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) rotate(${rot.toFixed(2)}deg) scale(${s.toFixed(3)})`
+        el.style.opacity = o.toFixed(3)
+      })
+      const isOn = Math.abs(P - a) < 0.3 || (a === N - 1 && P > a)
+      const showHint = P < 0.08
+      if (a !== cur.a || isOn !== cur.on || showHint !== cur.hint) {
+        cur = { a, on: isOn, hint: showHint }
+        setActive(a); setOn(isOn); setHint(showHint)
+      }
+      if (bar) bar.style.transform = `scaleY(${clamp(P / (N - 1), 0, 1).toFixed(3)})`
+      dots(clamp((P - (N - 1) - 0.3) / 0.6, 0, 1))
+    }
+    const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting))
+    io.observe(sec)
+    size()
+    addEventListener("resize", size)
+    raf = requestAnimationFrame(frame)
+    return () => { cancelAnimationFrame(raf); io.disconnect(); removeEventListener("resize", size) }
+  }, [N])
 
   return (
-    <section id="story" ref={root}>
-      <span id="story-notes" className="anchor" style={{ top: "52%" }} />
-      <span id="story-check" className="anchor" style={{ top: "80%" }} />
-      <div className="stage">
-        <div className="fold" aria-hidden="true">
-          <GlassFold color1="#1e3cc8" color2="#06081e" color3="#96d7ff" speed={0.35} scale={1} noise={0.1} />
-        </div>
-        <div className="stage__shade" aria-hidden="true" />
-        <div className="beam" aria-hidden="true" />
-
-        {/* флакон: камера → нахил за вказівником → сам флакон з відображенням */}
-        <div className="cam" data-cam>
-          <div className="tilt" data-tilt>
-            <div className="halo" aria-hidden="true" />
-            <div className="bottle">
-              <img className="bottle__img" src="/img/bleu-bottle.png" alt="Флакон Bleu de Chanel Eau de Parfum" draggable={false} />
-              <div className="bottle__sheen" aria-hidden="true" />
-              <div className="spots">
-                {SPOTS.map((s, i) => (
-                  <button
-                    key={s.k}
-                    className={"hs" + (s.flip ? " flip" : "") + (spot === i ? " on" : "")}
-                    style={{ left: s.l, top: s.t }}
-                    onClick={() => setSpot(spot === i ? -1 : i)}
-                    data-hs
-                  >
-                    <span className="dot" />
-                    <span className="hl">
-                      {s.k}
-                      <em>{s.v}</em>
-                    </span>
-                  </button>
-                ))}
+    <section className="story ov-story" id="story" ref={root} data-theme="night" style={{ height: `calc(100svh * ${((N - 1) * SEG + 2.4).toFixed(2)})` }}>
+      <div className="ov-story__stage story__stage" ref={stage}>
+        <span className="ov-cross" style={{ left: 40, top: 96 }} />
+        <span className="ov-cross" style={{ right: 27, top: 96 }} />
+        {STORY.map((p, i) => (
+          <p key={p.id} className={"ov-ghost story__ghost" + (i === active && on ? " is-on" : "")} aria-hidden="true">{p.word}</p>
+        ))}
+        {STORY.map((p) => (
+          <div key={p.id} className="ov-story__bottle"><Bottle p={p} /></div>
+        ))}
+        {STORY.map((p, i) => {
+          const v = p.volumes[0]
+          return (
+            <article key={p.id} className={"ov-story__copy" + (i === active && on ? " is-on" : "")} aria-hidden={i !== active}>
+              <span className="ov-label">{p.brand} · {p.type}</span>
+              <h3>{p.name}</h3>
+              <p>{p.desc}</p>
+              <dl className="ov-story__notes">
+                <div><dt>Верх</dt><dd>{p.notes[0]}</dd></div>
+                <div><dt>Серце</dt><dd>{p.notes[1]}</dd></div>
+                <div><dt>База</dt><dd>{p.notes[2]}</dd></div>
+                <div><dt>Стійкість</dt><dd>{p.wear}</dd></div>
+              </dl>
+              <div className="ov-story__buy">
+                <span className="ov-price">від {uah(fromPrice(p))}</span>
+                <button className="ov-btn ov-btn--primary" onClick={() => addToCart(p, v)} tabIndex={i === active ? 0 : -1}>У кошик · {v.ml} мл</button>
               </div>
-            </div>
-            <img className="bottle__mirror" src="/img/bleu-bottle.png" alt="" aria-hidden="true" draggable={false} />
-            <div className="floor" aria-hidden="true" />
-          </div>
-        </div>
-        <div className="fog" data-fog aria-hidden="true">
-          <i className="f0" />
-          <i className="f1" />
-          <i className="f2" />
-        </div>
-
-        {/* 1 — герой */}
-        <div className="layer L0" data-l0>
-          <div className="hero-copy" data-hero>
-            <span className="chip">Оригінальна парфумерія · Київ</span>
-            <h1>
-              <span className="ln"><span>Володій</span></span>
-              <span className="ln"><span>ніччю</span></span>
-            </h1>
-            <p className="hero-sub">Bleu de Chanel, Dior Sauvage та ще 12 ароматів від офіційних дистриб'юторів. Доставка по Україні за 1–2 дні.</p>
-            <div className="hero-cta">
-              <button className="btn light" onClick={() => addToCart(bleu, bleu.volumes[1])}>
-                Купити Bleu · 7 490 ₴
-              </button>
-              <a className="btn line" href="#catalog">Весь каталог</a>
-            </div>
-          </div>
-        </div>
-        <div className="layer L1" data-l1>
-          <div className="hud" data-hud>
-            <span className="chip">Bleu de Chanel</span>
-            <pre>{"EAU DE PARFUM\n100 МЛ · 3.4 FL.OZ\nAROMATIC WOODY"}</pre>
-          </div>
-          <p className="caption" data-cap>
-            Тільки оригінали.
-            <br />
-            Чек і батч-код
-            <br />
-            до кожного флакона.
-          </p>
-          <span className="hint" data-cap>
-            <i />
-            Гортай далі
-          </span>
-        </div>
-
-        {/* 2 — заява */}
-        <div className="layer L2" data-l2>
-          <div className="vision">
-            <span className="chip" data-vfade>Чому Orvelle</span>
-            <h2>
-              {words("Аромат, який", "w")}
-              <br />
-              {words("впізнають раніше,", "w")}
-              <br />
-              {words("ніж тебе.", "w")}
-            </h2>
-            <p data-vfade>Ми продаємо лише те, що можемо підтвердити документами постачальника.</p>
-          </div>
-        </div>
-
-        {/* 3 — ноти */}
-        <div className="layer L3" data-l3>
-          <div className="acct">
-            <span className="tagline">Піраміда нот</span>
-            <p>{words(NOTE_TEXT, "aw")}</p>
-          </div>
-        </div>
-
-        {/* 4 — перевірка */}
-        <div className="layer L4" data-l4>
-          <div className="cred" data-cred>
-            <span className="tagline">✕ Контроль якості</span>
-            <h3>Кожен флакон перевіряємо до відправки</h3>
-          </div>
-          <div className="ccard" data-card>
-            <h4>
-              Перевірено флаконів
-              <br />у 2026 році
-            </h4>
-            <span className="cnote">Склад у Києві · щоденно</span>
-            <div className="cnum">
-              <b data-count>0</b>
-              <span>шт.</span>
-              <span className="ctag">+340 / тиждень</span>
-            </div>
-            <svg viewBox="0 0 220 70" aria-hidden="true">
-              <polyline data-spark points="0,60 30,55 60,57 90,44 120,46 150,30 180,24 214,10" />
-              <circle cx="90" cy="44" r="2.4" fill="#fff" />
-              <circle cx="150" cy="30" r="2.4" fill="#fff" />
-              <circle cx="214" cy="10" r="3.4" fill="#96d7ff" />
-            </svg>
-            <span className="cfoot">Січ · Квіт · Лип · Жовт</span>
-          </div>
-          <ol className="feats" data-feats>
-            {FEATS.map((f, i) => (
-              <li key={f} className={feat === i ? "on" : ""} onClick={() => setFeat(feat === i ? -1 : i)}>
-                <span>0{i + 1}</span>
-                {f}
-                <i>→</i>
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        <div className="prog" aria-hidden="true">
-          <i data-prog />
-        </div>
+            </article>
+          )
+        })}
+        <div className="ov-story__idx"><b>0{active + 1}</b><span>/ 0{N}</span></div>
+        <div className="ov-story__bar"><i /></div>
+        <div className="ov-story__hint" style={{ opacity: hint ? 1 : 0 }}><i />Гортайте — аромати виходять справа</div>
+        <canvas className="ov-dots" ref={dotsRef} aria-hidden="true" />
       </div>
     </section>
   )

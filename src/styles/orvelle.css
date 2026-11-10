@@ -1,0 +1,275 @@
+/* Orvelle — компоненти дизайн-системи (копія components/bundle.css). Значення — з tokens.css. */
+::selection { background: var(--ink); color: var(--on-ink); }
+.ov-pad { padding: var(--space-6); }
+.ov-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.ov-stack { display: flex; flex-direction: column; gap: var(--space-4); }
+:where(.ov-btn, .ov-vols button, .ov-nav a, .ov-nav button, .ov-foot-col a, .ov-email input):focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+/* ── рідке скло: напівпрозорий фон + градієнтна рамка-маска ── */
+.ov-glass { position: relative; background: var(--surface-glass); background-blend-mode: luminosity; backdrop-filter: blur(var(--blur-glass)) saturate(180%); -webkit-backdrop-filter: blur(var(--blur-glass)) saturate(180%); box-shadow: var(--shadow-glass); border: 0; }
+.ov-glass::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.4px; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.15) 20%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 0.15) 80%, rgba(255, 255, 255, 0.45) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#fff 0 0) content-box exclude, linear-gradient(#fff 0 0); }
+[data-theme="mist"] .ov-glass::before { background: linear-gradient(180deg, rgba(7, 11, 20, 0.3), rgba(7, 11, 20, 0.08) 30%, rgba(7, 11, 20, 0) 50%, rgba(7, 11, 20, 0.08) 70%, rgba(7, 11, 20, 0.3)); }
+
+/* ── підписи і чіпи ── */
+.ov-label { font-family: var(--font-mono); font-size: 11px; line-height: 1.6; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted); }
+.ov-label--ink { color: var(--ink); }
+.ov-label--accent { color: var(--accent); }
+.ov-chip { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 11px; border-radius: var(--radius-pill); font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.ov-chip--solid { background: var(--ink); color: var(--on-ink); box-shadow: none; }
+.ov-chip--glass { background: var(--surface-glass); box-shadow: inset 0 0 0 1px var(--line); backdrop-filter: blur(var(--blur-glass)); -webkit-backdrop-filter: blur(var(--blur-glass)); }
+.ov-chip--alert { color: var(--alert); box-shadow: inset 0 0 0 1px var(--alert); }
+.ov-chip__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2.5px var(--fill-subtle); }
+
+/* ── кнопки ── */
+.ov-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); height: 46px; padding: 0 24px; border-radius: var(--radius-pill); border: 1px solid transparent; font-family: var(--font-sans); font-size: 14px; font-weight: 500; letter-spacing: 0; white-space: nowrap; cursor: pointer; text-decoration: none; color: var(--ink); background: none;
+  transition: transform var(--dur-fast) var(--ease-soft), background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast), opacity var(--dur-fast); }
+.ov-btn:hover { transform: translateY(-2px); }
+.ov-btn:active { transform: translateY(0) scale(0.98); }
+.ov-btn[disabled] { opacity: 0.4; pointer-events: none; }
+.ov-btn--primary { background: var(--ink); color: var(--on-ink); }
+.ov-btn--primary:hover { opacity: 0.88; }
+.ov-btn--glass:hover { background: var(--fill-subtle); }
+.ov-btn--line { border-color: var(--line-strong); }
+.ov-btn--line:hover { border-color: var(--ink-muted); background: var(--fill-subtle); }
+.ov-btn--link { position: relative; height: auto; padding: 2px 0; border-radius: 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
+.ov-btn--link:hover { transform: none; }
+.ov-btn--link::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 0.35s var(--ease-draw); }
+.ov-btn--link:hover::after { transform: scaleX(1); transform-origin: left; }
+.ov-btn--icon { width: 44px; height: 44px; padding: 0; }
+.ov-btn--wide { width: 100%; }
+.ov-btn svg, .ov-ico { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── перемикач об'єму ── */
+.ov-vols { display: inline-flex; padding: 3px; border-radius: var(--radius-pill); background: var(--fill-subtle); }
+.ov-vols button { height: 30px; padding: 0 12px; border: 0; border-radius: var(--radius-pill); background: none; color: var(--ink-muted); font: 500 12px/1 var(--font-sans); cursor: pointer; white-space: nowrap; transition: background 0.2s, color 0.2s; }
+.ov-vols button:hover { color: var(--ink); }
+.ov-vols button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
+.ov-vols button[disabled] { opacity: 0.4; text-decoration: line-through; pointer-events: none; }
+
+/* ── навігація ── */
+.ov-nav { position: relative; z-index: 5; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 64px; padding: 0 var(--space-10); color: var(--ink); }
+.ov-nav__links { display: flex; gap: 26px; }
+.ov-nav__links a { color: var(--ink-muted); font-size: 13px; text-decoration: none; transition: color var(--dur-fast); }
+.ov-nav__links a:hover, .ov-nav__links a[aria-current="page"] { color: var(--ink); }
+.ov-logo { font-family: var(--font-display); font-size: 16px; line-height: 1; letter-spacing: 0.3em; padding-left: 0.3em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+.ov-nav__tools { justify-self: end; display: flex; align-items: center; gap: 16px; }
+.ov-nav__tools > button:not(.ov-btn) { position: relative; display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; background: none; color: var(--ink); cursor: pointer; }
+.ov-nav__tools svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.ov-cart b { position: absolute; right: -5px; top: -3px; display: grid; place-items: center; min-width: 15px; height: 15px; padding: 0 4px; border-radius: var(--radius-pill); background: var(--accent); color: var(--on-accent); font: 600 9px/1 var(--font-sans); }
+.ov-nav--pill { max-width: 880px; margin: var(--space-4) auto; height: 56px; padding: 0 8px 0 var(--space-6); border-radius: var(--radius-pill); }
+.ov-nav--pill .ov-btn { height: 40px; padding: 0 20px; font-size: 13px; }
+
+/* ── флакони: справжній пекшот або CSS-силует ── */
+.ov-shot { display: block; height: 100%; width: auto; filter: drop-shadow(var(--shadow-bottle)); user-select: none; -webkit-user-drag: none; }
+.ov-flacon { position: relative; width: var(--w, 120px); height: var(--h, 170px); filter: drop-shadow(var(--shadow-bottle)); }
+.ov-flacon__cap { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: var(--cw, 44%); height: var(--ch, 24%); border-radius: var(--cr, 4px) var(--cr, 4px) 2px 2px; background: var(--cap); }
+.ov-flacon__body { position: absolute; left: 0; right: 0; top: calc(var(--ch, 24%) - 1px); bottom: 0; border-radius: var(--br, 10px); overflow: hidden; background: var(--glass); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14), inset 0 -30px 40px rgba(0, 0, 0, 0.35); }
+.ov-flacon__body::before { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 22%, rgba(255, 255, 255, 0) 78%, rgba(255, 255, 255, 0.12) 92%, rgba(255, 255, 255, 0) 100%); }
+.ov-flacon__label { position: absolute; z-index: 1; left: 8%; right: 8%; top: 54%; text-align: center; font: 500 var(--ls, 8px)/1.5 var(--font-sans); letter-spacing: 0.22em; text-transform: uppercase; color: var(--lc, rgba(255, 255, 255, 0.86)); }
+.ov-flacon--sauvage { --w: 128px; --h: 176px; --cw: 62%; --ch: 25%; --cr: 6px; --br: 7px; --ls: 9px;
+  --cap: linear-gradient(90deg, rgba(255, 255, 255, 0) 15%, rgba(255, 255, 255, 0.22) 38%, rgba(255, 255, 255, 0) 58%), var(--material-lacquer);
+  --glass: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.45)), var(--material-blue); }
+.ov-flacon--aventus { --w: 104px; --h: 200px; --cw: 36%; --ch: 22%; --cr: 3px; --br: 6px; --lc: var(--material-silver);
+  --cap: linear-gradient(90deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.35)), var(--material-silver);
+  --glass: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 40%), var(--material-lacquer); }
+.ov-flacon--oud { --w: 132px; --h: 160px; --cw: 74%; --ch: 23%; --cr: 3px; --br: 5px; --lc: var(--material-gold);
+  --cap: linear-gradient(90deg, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.16) 40%, rgba(255, 255, 255, 0) 60%), var(--material-lacquer);
+  --glass: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.4)), var(--material-amber); }
+.ov-flacon--br540 { --w: 116px; --h: 176px; --cw: 48%; --ch: 23%; --cr: 5px; --br: 12px; --lc: var(--material-crystal);
+  --cap: linear-gradient(90deg, rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.35) 40%, rgba(0, 0, 0, 0.25)), var(--material-gold);
+  --glass: linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0) 18%), linear-gradient(180deg, rgba(163, 34, 46, 0.6), rgba(120, 20, 30, 0.95)); }
+.ov-flacon--br540 .ov-flacon__body { box-shadow: inset 0 0 0 5px rgba(223, 231, 233, 0.38), inset 0 0 0 1px rgba(255, 255, 255, 0.5); }
+
+/* ── сцена: «екран» у рамці, як на референсі ── */
+.ov-surround { background: var(--surround); padding: var(--space-10); }
+.ov-screen { position: relative; overflow: hidden; border-radius: var(--radius-md); color: var(--ink); background: radial-gradient(60% 75% at 50% 52%, var(--stage-glow), var(--surface-100) 78%); isolation: isolate; }
+.ov-ghost { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 240px; line-height: 0.85; letter-spacing: 0.01em; text-transform: uppercase; white-space: nowrap; pointer-events: none; user-select: none; z-index: 0;
+  color: var(--ghost); background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.035) 85%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.ov-corner { position: absolute; z-index: 3; bottom: 30px; margin: 0; max-width: 250px; font-size: 13px; line-height: 1.5; color: var(--ink-muted); }
+.ov-corner b { font-weight: 500; color: var(--ink); }
+.ov-corner--l { left: var(--space-10); }
+.ov-corner--r { right: var(--space-10); text-align: right; display: flex; align-items: center; gap: 12px; max-width: none; }
+.ov-coords { position: absolute; z-index: 3; left: 50%; bottom: 34px; transform: translateX(-50%); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--ink-muted); font-variant-numeric: tabular-nums; white-space: pre; }
+.ov-cross { position: absolute; z-index: 1; width: 13px; height: 13px; transform: translate(-50%, -50%); opacity: 0.5; pointer-events: none;
+  background: linear-gradient(var(--ink-muted), var(--ink-muted)) center / 1px 100% no-repeat, linear-gradient(var(--ink-muted), var(--ink-muted)) center / 100% 1px no-repeat; }
+
+/* ── герой ── */
+.ov-hero .ov-screen { height: 520px; }
+.ov-hero__bottle { position: absolute; z-index: 2; left: 50%; top: 52%; height: 300px; transform: translate(-50%, -50%) rotate(-16deg); will-change: transform; }
+
+/* ── скрол-історія ── */
+.ov-story { --h: 560px; }
+.ov-story .ov-screen { height: var(--h); }
+.ov-story__scroll { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; z-index: 4; }
+.ov-story__scroll::-webkit-scrollbar { display: none; }
+.ov-story__stage { position: sticky; top: 0; height: var(--h); overflow: hidden; }
+.ov-story__stage .ov-ghost { opacity: 0; transform: translate(-50%, -36%); transition: opacity 0.6s var(--ease-out-expo), transform 1s var(--ease-out-expo); }
+.ov-story__stage .ov-ghost.is-on { opacity: 1; transform: translate(-50%, -50%); }
+.ov-story__bottle { position: absolute; z-index: 2; left: 62%; top: 50%; width: 0; height: 0; display: grid; place-items: center; will-change: transform, opacity; }
+.ov-story__bottle > * { position: absolute; left: 0; top: 0; transform: translate(-50%, -50%); }
+.ov-story__bottle .ov-shot { height: 290px; }
+.ov-story__copy { position: absolute; z-index: 3; left: var(--space-10); top: 96px; width: 330px; pointer-events: none; }
+.ov-story__copy.is-on { pointer-events: auto; }
+.ov-story__copy > * { opacity: 0; transform: translateY(18px); transition: opacity 0.5s var(--ease-out-expo), transform 0.9s var(--ease-out-expo); }
+.ov-story__copy.is-on > * { opacity: 1; transform: none; }
+.ov-story__copy.is-on > :nth-child(2) { transition-delay: 0.08s; }
+.ov-story__copy.is-on > :nth-child(3) { transition-delay: 0.16s; }
+.ov-story__copy.is-on > :nth-child(4) { transition-delay: 0.24s; }
+.ov-story__copy.is-on > :nth-child(5) { transition-delay: 0.32s; }
+.ov-story__copy h3 { margin: 10px 0 14px; font-family: var(--font-display); font-weight: 400; font-size: 44px; line-height: 1.04; }
+.ov-story__copy p { margin: 0; font-size: 16px; line-height: 1.6; font-weight: 300; color: var(--ink-muted); }
+.ov-story__notes { display: grid; gap: 8px; margin: 22px 0 0; padding: 16px 0 0; border-top: 1px solid var(--line); }
+.ov-story__notes div { display: grid; grid-template-columns: 72px 1fr; font-size: 13px; line-height: 1.4; }
+.ov-story__notes dt { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); padding-top: 2px; }
+.ov-story__notes dd { margin: 0; color: var(--ink); }
+.ov-story__buy { display: flex; align-items: center; gap: 18px; margin-top: 24px; }
+.ov-story__idx { position: absolute; z-index: 3; right: var(--space-10); top: 96px; text-align: right; }
+.ov-story__idx b { display: block; font-weight: 300; font-size: 40px; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.ov-story__idx span { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--ink-muted); }
+.ov-story__bar { position: absolute; z-index: 3; right: var(--space-10); top: 160px; width: 2px; height: 120px; background: var(--line); }
+.ov-story__bar i { display: block; width: 100%; height: 100%; background: var(--accent); transform-origin: top; transform: scaleY(0); }
+.ov-story__hint { position: absolute; z-index: 3; left: 50%; bottom: 30px; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted); transition: opacity 0.4s; }
+.ov-story__hint i { position: relative; width: 18px; height: 18px; border: 1.3px solid currentColor; border-radius: 50%; }
+.ov-story__hint i::after { content: ""; position: absolute; left: 50%; top: 4px; width: 4px; height: 4px; margin-left: -2px; border-right: 1.3px solid currentColor; border-bottom: 1.3px solid currentColor; transform: rotate(45deg); animation: ov-nudge 1.6s ease-in-out infinite; }
+@keyframes ov-nudge { 50% { translate: 0 2px; } }
+.ov-dots { position: absolute; inset: 0; z-index: 6; width: 100%; height: 100%; pointer-events: none; }
+.ov-story__next { position: absolute; z-index: 7; inset: 0; display: grid; place-content: center; justify-items: center; text-align: center; gap: 16px; opacity: 0; transition: opacity 0.6s; pointer-events: none; }
+.ov-story__next.is-on { opacity: 1; pointer-events: auto; }
+.ov-story__next h3 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 40px; }
+
+/* ── картка товару ── */
+.ov-card { display: flex; flex-direction: column; width: 290px; border-radius: var(--radius-md); overflow: hidden; background: var(--surface-200); box-shadow: inset 0 0 0 1px var(--line); transition: transform 0.35s var(--ease-soft), box-shadow 0.35s; }
+.ov-card:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 1px var(--line), var(--shadow-lift); }
+.ov-card__stage { position: relative; height: 270px; display: grid; place-items: center; overflow: hidden; background: radial-gradient(65% 70% at 50% 48%, var(--stage-glow), var(--surface-100) 85%); }
+.ov-card__stage .ov-ghost { font-size: 110px; }
+.ov-card__stage > .ov-shot, .ov-card__stage > .ov-flacon { position: relative; z-index: 1; }
+.ov-card__stage > .ov-shot { height: 200px; transform: rotate(-10deg); transition: transform 0.6s var(--ease-out-expo); }
+.ov-card__stage > .ov-flacon { transform: rotate(-8deg) scale(0.92); transition: transform 0.6s var(--ease-out-expo); }
+.ov-card:hover .ov-card__stage > .ov-shot, .ov-card:hover .ov-card__stage > .ov-flacon { transform: rotate(0deg) scale(1); }
+.ov-card__idx { position: absolute; z-index: 2; left: var(--space-4); top: 14px; font-weight: 300; font-size: 28px; line-height: 1; letter-spacing: -0.02em; color: var(--ink); }
+.ov-card__wish { position: absolute !important; z-index: 2; right: 10px; top: 10px; }
+.ov-card__badge { position: absolute; z-index: 2; left: var(--space-4); bottom: var(--space-4); }
+.ov-card__body { display: flex; flex-direction: column; gap: var(--space-4); padding: 20px var(--space-6) var(--space-6); }
+.ov-card__name { margin: 6px 0 0; font-family: var(--font-display); font-weight: 400; font-size: 26px; line-height: 1.08; color: var(--ink); }
+.ov-card__notes { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink-muted); }
+.ov-card__foot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); padding-top: var(--space-4); border-top: 1px solid var(--line); }
+.ov-price { font-size: 22px; line-height: 1.2; font-weight: 500; letter-spacing: -0.02em; white-space: nowrap; color: var(--ink); }
+.ov-price small { display: block; font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--ink-muted); }
+
+/* ── ключові ноти ── */
+.ov-keynotes { display: flex; align-items: center; gap: var(--space-6); }
+.ov-ring { position: relative; width: 140px; height: 140px; flex: none; }
+.ov-ring svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ov-ring .track { fill: none; stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 2 5; }
+.ov-ring .arc-top { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; }
+.ov-ring .arc-heart { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+.ov-ring .arc-base { fill: none; stroke: var(--ink-muted); stroke-width: 2; stroke-linecap: round; }
+.ov-ring .orb { fill: var(--fill-subtle); stroke: var(--line); }
+.ov-ring__c { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+.ov-ring__c b { font-family: var(--font-display); font-weight: 400; font-size: 24px; color: var(--ink); }
+.ov-tiers { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-3); }
+.ov-tiers li { display: grid; grid-template-columns: 10px 64px 1fr; align-items: baseline; gap: var(--space-2); font-size: 13px; line-height: 1.4; color: var(--ink); }
+.ov-tiers i { width: 8px; height: 8px; border-radius: 50%; transform: translateY(-1px); }
+.ov-tiers span { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+.ov-tiers .t-top { background: var(--accent); }
+.ov-tiers .t-heart { background: var(--ink); }
+.ov-tiers .t-base { background: var(--ink-muted); }
+
+/* ── підписка: кнопка → email з друкарською машинкою ── */
+.ov-club { position: relative; display: grid; justify-items: center; gap: 26px; padding: 56px var(--space-6); text-align: center; }
+.ov-club h2 { margin: 0; max-width: 760px; font-family: var(--font-display); font-weight: 400; font-size: 46px; line-height: 1.08; letter-spacing: -0.01em;
+  background: linear-gradient(180deg, var(--ink), var(--ink) 45%, var(--ink-muted)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ov-club__cta { min-height: 50px; display: grid; place-items: center; }
+.ov-email { display: flex; align-items: center; gap: 8px; width: 340px; height: 50px; padding: 0 5px 0 20px; border: 1px solid var(--line-strong); border-radius: var(--radius-pill); background: var(--fill-subtle); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: border-color var(--dur-fast); }
+.ov-email:focus-within { border-color: var(--ink-muted); }
+.ov-email input { flex: 1; min-width: 0; height: 100%; border: 0; background: none; color: var(--ink); font: 400 14px var(--font-sans); outline: none; }
+.ov-email input::placeholder { color: var(--ink-muted); }
+.ov-email button { display: grid; place-items: center; width: 40px; height: 40px; flex: none; border: 0; border-radius: 50%; background: var(--ink); color: var(--on-ink); cursor: pointer; }
+.ov-pop { animation: ov-pop 0.2s var(--ease-soft) both; }
+@keyframes ov-pop { from { opacity: 0; transform: scale(0.95); } }
+
+/* ── футер зі скляним вордмарком ── */
+.ov-footer { position: relative; height: 560px; overflow: hidden; isolation: isolate; background: var(--surface-000); color: var(--ink); }
+.ov-footer__glow { position: absolute; inset: 0; z-index: 0; background: radial-gradient(70% 60% at 50% 100%, var(--stage-glow), rgba(4, 6, 11, 0) 72%); }
+.ov-footer__grid { position: relative; z-index: 3; display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr; gap: 32px; padding: 52px var(--space-10) 0; }
+.ov-footer__title { margin: 18px 0 0; font-family: var(--font-display); font-weight: 400; font-size: 22px; line-height: 1.2; }
+.ov-footer__text { margin: 12px 0 0; max-width: 320px; font-size: 13.5px; line-height: 1.5; color: var(--ink-muted); }
+.ov-footer__copy { margin: 18px 0 0; font-size: 12px; color: var(--ink-muted); }
+.ov-footer .ov-btn { margin-top: 18px; height: 38px; padding: 0 18px; font-size: 13px; }
+.ov-footer .ov-row { margin-top: 14px; gap: 8px; }
+.ov-foot-col h4 { margin: 0; font-size: 15px; font-weight: 500; letter-spacing: -0.02em; }
+.ov-foot-col ul { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 13px; font-size: 13px; }
+.ov-foot-col a { color: var(--ink-muted); text-decoration: none; transition: color var(--dur-fast); }
+.ov-foot-col a:hover { color: var(--ink); }
+.ov-wordmark { position: absolute; z-index: 1; left: 50%; bottom: -10px; transform: translateX(-50%); margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 168px; line-height: 0.8; letter-spacing: 0.02em; white-space: nowrap; pointer-events: none; user-select: none;
+  color: rgba(190, 205, 235, 0.3); background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(150, 180, 235, 0.16) 52%, rgba(255, 255, 255, 0.34)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.35)) drop-shadow(0 0 22px rgba(156, 194, 255, 0.3)); }
+.ov-fog { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; height: 22%; pointer-events: none; background: linear-gradient(to top, var(--fog) 0%, rgba(16, 29, 56, 0.6) 35%, rgba(16, 29, 56, 0) 100%); }
+
+/* ── шоукейс: флакон перетікає в наступний при скролі ── */
+.ov-show { --h: 600px; }
+.ov-show .ov-screen { height: var(--h); background: radial-gradient(55% 70% at 58% 58%, var(--stage-glow), var(--surface-100) 80%); }
+.ov-show .ov-story__stage { height: var(--h); }
+.ov-water { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.ov-show__halo { position: absolute; z-index: 1; left: 60%; top: 50%; width: 560px; height: 560px; transform: translate(-50%, -50%); border-radius: 50%; pointer-events: none; background: radial-gradient(closest-side, var(--halo, rgba(70, 130, 255, 0.34)), rgba(0, 0, 0, 0) 72%); }
+.ov-show__bottles { position: absolute; z-index: 2; left: 60%; top: 48%; width: 0; height: 0; animation: ov-float 6s ease-in-out infinite; }
+.ov-show__bottles > * { position: absolute; left: 0; top: 0; will-change: transform, opacity, filter; }
+.ov-show__bottles .ov-shot { height: 300px; }
+@keyframes ov-float { 50% { translate: 0 -12px; } }
+.ov-show__title { position: absolute; z-index: 3; left: var(--space-10); top: 50%; transform: translateY(-50%); width: 430px; }
+.ov-show__name { position: relative; height: 128px; overflow: hidden; margin: 12px 0 10px; }
+.ov-show__name span { position: absolute; left: 0; top: 0; bottom: 0; display: flex; align-items: flex-end; font-family: var(--font-display); font-size: 120px; line-height: 1; text-transform: uppercase; white-space: nowrap; letter-spacing: 0.01em;
+  background: linear-gradient(180deg, var(--ink) 30%, var(--ink-muted)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.ov-show__meta { position: relative; height: 20px; overflow: hidden; }
+.ov-show__meta span { position: absolute; left: 0; top: 0; bottom: 0; white-space: nowrap; }
+.ov-show__cta { position: absolute; z-index: 3; left: 50%; bottom: 28px; transform: translateX(-50%); }
+.ov-show__steps { position: absolute; z-index: 3; left: var(--space-10); bottom: 40px; display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--ink-muted); font-variant-numeric: tabular-nums; }
+.ov-show__steps i { display: block; width: 28px; height: 2px; background: var(--line); transition: background var(--dur-fast), width 0.4s var(--ease-out-expo); }
+.ov-show__steps i.is-on { width: 48px; background: var(--accent); }
+.ov-show__hint { position: absolute; z-index: 3; right: var(--space-10); bottom: 40px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted); }
+
+/* ── подарункова коробка, що левітує ── */
+.ov-gift { position: relative; height: 560px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.1fr; align-items: center; background: radial-gradient(55% 70% at 66% 50%, var(--stage-glow), var(--surface-000) 82%); color: var(--ink); }
+.ov-gift__copy { padding-left: var(--space-10); max-width: 360px; z-index: 2; }
+.ov-gift__copy h3 { margin: 12px 0 14px; font-family: var(--font-display); font-weight: 400; font-size: 40px; line-height: 1.08; }
+.ov-gift__copy p { margin: 0 0 24px; font-size: 15px; line-height: 1.6; font-weight: 300; color: var(--ink-muted); }
+.ov-gift__stage { position: relative; height: 100%; perspective: 1400px; }
+.ov-gift__scene { position: absolute; left: 50%; top: 57%; width: 0; height: 0; transform-style: preserve-3d; transform: rotateX(-16deg) rotateY(-34deg); }
+.ov-gift__float { position: absolute; left: 0; top: 0; transform-style: preserve-3d; animation: ov-float 5s ease-in-out infinite; }
+.ov-gift__float--b { animation-duration: 6.2s; animation-delay: -1.4s; }
+.ov-gift__float--c { animation-duration: 7s; animation-delay: -3s; }
+.ov-gift__lid { transform-style: preserve-3d; transform: translate3d(0, -150px, 0) rotateZ(-12deg) rotateX(10deg); transition: transform 1.2s var(--ease-out-expo); }
+.ov-gift.is-open .ov-gift__lid { transform: translate3d(24px, -196px, 0) rotateZ(-20deg) rotateX(20deg); }
+.ov-gift__bottle { position: absolute; left: 0; top: 0; transform: translate3d(-50%, -36%, 0) rotateY(34deg) rotateX(16deg) rotateZ(-10deg); height: 150px; transition: transform 1.2s var(--ease-out-expo); }
+.ov-gift.is-open .ov-gift__bottle { transform: translate3d(-50%, -42%, 30px) rotateY(34deg) rotateX(16deg) rotateZ(0deg); }
+.ov-gift__bottle .ov-shot { height: 150px; }
+.ov-gift__base { transform-style: preserve-3d; transform: translate3d(0, 140px, 0) rotateZ(5deg); }
+.ov-gift__shadow { position: absolute; left: 50%; bottom: 28px; width: 260px; height: 36px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0)); }
+.ov-cube { position: absolute; left: 0; top: 0; transform-style: preserve-3d; }
+.ov-cube > i { position: absolute; left: 0; top: 0; display: grid; place-items: center; background: var(--material-lacquer); box-shadow: inset 0 0 0 2px var(--material-gold), inset 0 0 40px rgba(255, 255, 255, 0.05); backface-visibility: hidden; }
+.ov-cube .f, .ov-cube .bk { width: var(--w); height: var(--h); margin: calc(var(--h) / -2) 0 0 calc(var(--w) / -2); }
+.ov-cube .l, .ov-cube .r { width: var(--d); height: var(--h); margin: calc(var(--h) / -2) 0 0 calc(var(--d) / -2); }
+.ov-cube .t, .ov-cube .bt { width: var(--w); height: var(--d); margin: calc(var(--d) / -2) 0 0 calc(var(--w) / -2); }
+.ov-cube .f { transform: translateZ(calc(var(--d) / 2)); }
+.ov-cube .bk { transform: rotateY(180deg) translateZ(calc(var(--d) / 2)); }
+.ov-cube .r { transform: rotateY(90deg) translateZ(calc(var(--w) / 2)); }
+.ov-cube .l { transform: rotateY(-90deg) translateZ(calc(var(--w) / 2)); }
+.ov-cube .t { transform: rotateX(90deg) translateZ(calc(var(--h) / 2)); background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0) 50%), var(--material-lacquer); }
+.ov-cube .bt { transform: rotateX(-90deg) translateZ(calc(var(--h) / 2)); }
+.ov-cube--lid { --w: 190px; --h: 110px; --d: 190px; }
+.ov-cube--lid .f::after, .ov-cube--lid .l::after, .ov-cube--lid .r::after, .ov-cube--lid .bk::after { content: ""; position: absolute; left: 2px; right: 2px; bottom: 22%; height: 26%; background: var(--material-crystal); }
+.ov-cube--lid .f b { position: absolute; z-index: 1; left: 0; right: 0; bottom: 22%; height: 26%; display: grid; place-items: center; font: 400 15px/1 var(--font-display); letter-spacing: 0.3em; padding-left: 0.3em; color: var(--material-lacquer); }
+.ov-cube--lid .t b { font: 400 54px/1 var(--font-display); color: var(--material-gold); transform: rotate(180deg); }
+.ov-cube--base { --w: 210px; --h: 46px; --d: 210px; }
+.ov-cube--base .t { display: none; }
+.ov-cube--base .bt { background: radial-gradient(60% 60% at 50% 50%, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0)), var(--material-lacquer); backface-visibility: visible; }
+.ov-cube--base > i { backface-visibility: visible; }
+.ov-cube--base .f::after { content: ""; position: absolute; top: 2px; bottom: 2px; left: 62%; width: 14%; background: var(--material-crystal); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ov-show__bottles, .ov-gift__float { animation: none; }
+  .ov-btn, .ov-card, .ov-story__copy > *, .ov-story__stage .ov-ghost { transition: none !important; }
+  .ov-story__hint i::after { animation: none; }
+}

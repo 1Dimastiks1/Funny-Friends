@@ -10,12 +10,12 @@ import GlassWorkspace, {
 const nightPalette = {
   "--gw-ink": "#eef3ff",
   "--gw-muted": "#9fb0cf",
-  "--gw-accent": "#96d7ff",
+  "--gw-accent": "#9cc2ff",
   "--gw-line": "#c8d8ff22",
   "--gw-background": "transparent",
   "--gw-shade": "#03070f99",
-  "--gw-surface": "#0b1a3c",
-  "--gw-panel": "#0d1f47",
+  "--gw-surface": "#0e1524",
+  "--gw-panel": "#12285a",
   "--gw-brand": "#e8eef8",
   "--gw-brand-ink": "#071230",
   "--gw-avatar": "#1e3cc8",
@@ -111,17 +111,17 @@ const cashFlowPeriods: WorkspaceCashFlowPeriod[] = [
 
 export function Club() {
   return (
-    <section id="club" className="club">
+    <section id="club" className="club" data-theme="night">
       <div className="club__head">
         <div>
-          <span className="chip">Orvelle Club</span>
-          <h2>5% бонусами з кожної покупки</h2>
+          <span className="ov-label ov-label--accent">Orvelle Club</span>
+          <h2 className="section-title">5% бонусами з кожної покупки</h2>
         </div>
         <p>Бонуси, замовлення й статус доставки — в одному кабінеті. Рівень Gold відкривається після 30 000 ₴ покупок і дає −7% назавжди.</p>
       </div>
       <div className="club__frame">
         <div className="club__fold" aria-hidden="true">
-          <GlassFold color1="#1e3cc8" color2="#06081e" color3="#96d7ff" speed={0.2} scale={0.8} noise={0.1} />
+          <GlassFold color1="#12285a" color2="#070b14" color3="#9cc2ff" speed={0.2} scale={0.8} noise={0.1} />
         </div>
         <GlassWorkspace
           brand="Orvelle Club"

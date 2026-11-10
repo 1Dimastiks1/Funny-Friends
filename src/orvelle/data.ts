@@ -22,6 +22,12 @@ export type Product = {
   featured?: boolean
   /** тон «етикетки»: фон, колір тексту */
   tone: [string, string]
+  /** слово-привид за флаконом (дизайн-система: ghost-word) */
+  word?: string
+  /** опис для скрол-історії, 1–2 речення */
+  desc?: string
+  /** CSS-силует, поки немає пекшота */
+  flacon?: "sauvage" | "aventus" | "oud" | "br540"
 }
 
 export const FAMILIES: { id: Family | "all" | "niche"; label: string }[] = [
@@ -37,13 +43,13 @@ const P = (p: Product) => p
 
 export const PRODUCTS: Product[] = [
   P({
-    id: "bleu", brand: "Chanel", name: "Bleu de Chanel", type: "Eau de Parfum", family: "woody",
+    id: "bleu", word: "Bleu", desc: "Свіжо вдень, глибоко ввечері: грейпфрут і м'ята осідають ладаном, кедром і сандалом.", brand: "Chanel", name: "Bleu de Chanel", type: "Eau de Parfum", family: "woody",
     notes: ["грейпфрут, лимон, м'ята", "імбир, мускатний горіх, жасмин", "ладан, кедр, сандал"], wear: "8–10 год",
     volumes: [{ ml: 50, price: 5290 }, { ml: 100, price: 7490 }, { ml: 150, price: 9690 }],
     cutout: "/img/bleu-bottle.png", featured: true, tone: ["#0b1d4d", "#dbe7ff"],
   }),
   P({
-    id: "sauvage", brand: "Dior", name: "Sauvage", type: "Parfum", family: "amber",
+    id: "sauvage", word: "Sauvage", flacon: "sauvage", desc: "Бергамот і мандарин на теплій основі з ладану, бобів тонка й ванілі — відкритий і впевнений.", brand: "Dior", name: "Sauvage", type: "Parfum", family: "amber",
     notes: ["бергамот, мандарин", "елемі, сандал", "ладан, боби тонка, ваніль"], wear: "10–12 год",
     volumes: [{ ml: 60, price: 5890 }, { ml: 100, price: 7990 }],
     featured: true, tone: ["#173263", "#dbe7ff"],
@@ -74,17 +80,17 @@ export const PRODUCTS: Product[] = [
     volumes: [{ ml: 75, price: 4590 }, { ml: 125, price: 5990 }], tone: ["#0e3550", "#d3ecf7"],
   }),
   P({
-    id: "oudwood", brand: "Tom Ford", name: "Oud Wood", type: "Eau de Parfum", family: "woody", niche: true,
+    id: "oudwood", word: "Oud", flacon: "oud", desc: "Рідкісний уд, сандал і кардамон — тепле дерево, що звучить тихо й дорого.", brand: "Tom Ford", name: "Oud Wood", type: "Eau de Parfum", family: "woody", niche: true,
     notes: ["кардамон, рожеве дерево", "уд, сандал", "боби тонка, амбра, ветивер"], wear: "8–10 год",
     volumes: [{ ml: 50, price: 12900 }, { ml: 100, price: 18900 }], tone: ["#3a2418", "#ecd3b4"],
   }),
   P({
-    id: "aventus", brand: "Creed", name: "Aventus", type: "Eau de Parfum", family: "woody", niche: true,
+    id: "aventus", word: "Aventus", flacon: "aventus", desc: "Ананас і чорна смородина над березою та дубовим мохом — аромат, що входить у кімнату першим.", brand: "Creed", name: "Aventus", type: "Eau de Parfum", family: "woody", niche: true,
     notes: ["ананас, бергамот, чорна смородина", "береза, пачулі, жасмин", "мускус, дубовий мох"], wear: "8–12 год",
     volumes: [{ ml: 50, price: 9990 }, { ml: 100, price: 13490 }], tone: ["#141619", "#d9dde2"],
   }),
   P({
-    id: "br540", brand: "Maison Francis Kurkdjian", name: "Baccarat Rouge 540", type: "Eau de Parfum", family: "amber", niche: true,
+    id: "br540", word: "540", flacon: "br540", desc: "Шафран і жасмин на амбрі й кедрі — світний, повітряний шлейф, який впізнають.", brand: "Maison Francis Kurkdjian", name: "Baccarat Rouge 540", type: "Eau de Parfum", family: "amber", niche: true,
     notes: ["шафран", "жасмин", "амбра, кедр"], wear: "10–12 год",
     volumes: [{ ml: 35, price: 9990 }, { ml: 70, price: 15490 }], tone: ["#7d1c27", "#f6d9d4"],
   }),
@@ -140,6 +146,10 @@ export const cart = {
   },
 }
 export const byId = (id: string) => PRODUCTS.find((p) => p.id === id)!
+
+/** Аромати для сцен головної: шоукейс (3) і скрол-історія (5). */
+export const SHOWCASE = ["bleu", "sauvage", "aventus"].map(byId)
+export const STORY = ["bleu", "sauvage", "aventus", "oudwood", "br540"].map(byId)
 
 /* відкриття кошика з будь-якого місця */
 const openers = new Set<() => void>()
